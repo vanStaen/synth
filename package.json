@@ -1,0 +1,22 @@
+{
+  "name": "synth",
+  "version": "1.0.0",
+  "description": "Softare Synthetiser",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanStaen/synth.git"
+  },
+  "keywords": [
+    "synth"
+  ],
+  "author": "vanStaen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanStaen/synth/issues"
+  },
+  "homepage": "https://github.com/vanStaen/synth#readme"
+}
