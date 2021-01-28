@@ -2,8 +2,9 @@
 
 ## To-dos:
 
-- [ ] Create basic synth UI. 
+- [ ] Create basic synth UI
+- [ ] Generate first sound with the Web Audio API
  
 ## Completed ✓
 
-- [x] Initialise Project Folder for Back- and Frontend. 
+- [x] Initialize Project Folder for Back- and Frontend
