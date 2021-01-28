@@ -7,7 +7,9 @@
     "start": "node index.js",
     "start-client": "react-scripts start",
     "devfr": "cd frontend/; npm start; cd ../;",
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "buildfe": "cd frontend/; npm run build; cd ../; git add -A; git commit -a -m \"deploy\"; git push;",
+    "deploy": "npm run buildfe; heroku git:remote -a synth-cvs; git push heroku main"
   },
   "repository": {
     "type": "git",
