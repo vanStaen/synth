@@ -1,23 +1,3 @@
-export enum Note {
-  "Aflat" = "Ab",
-  "A" = "A",
-  "Asharp" = "Bb",
-  "Bflat" = "Bb",
-  "B" = "B",
-  "C" = "C",
-  Csharp = "Db",
-  "Dflat" = "Db",
-  "D" = "D",
-  "Dsharp" = "Eb",
-  "Eflat" = "Eb",
-  "E" = "E",
-  "F" = "F",
-  "Fsharp" = "Gb",
-  "Gflat" = "Gb",
-  "G" = "G",
-  "Gsharp" = "Ab",
-}
-
 type notesInAnOctave = [
   number,
   number,

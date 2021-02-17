@@ -6,6 +6,8 @@ import './App.css';
 const App = () => {
 
   const [octave, setOctave] = useState(4);
+  const [volume, setVolume] = useState(4);
+  const [fitlerFreq, setFitlerFreq] = useState(10000);
 
   const audioContext = new AudioContext();
 
@@ -25,7 +27,7 @@ const App = () => {
   // Create a filter (LP)
   const primaryfilter = audioContext.createBiquadFilter();
   primaryfilter.type = "lowpass";
-  primaryfilter.frequency.value = 1500;
+  primaryfilter.frequency.value = fitlerFreq;
   primaryfilter.connect(primaryGainControl);
 
 
