@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import Keyboard from './component/keyboard/Keyboard';
 
 import './App.css';
 
 const App = () => {
+
+  const [octave, setOctave] = useState(4);
 
   const audioContext = new AudioContext();
 
@@ -36,7 +39,6 @@ const App = () => {
         channelData[i] = Math.random() * 2 - 1;
       }  
       //Resume audioContext when clicking button
-      console.log("Resume audioContext");
       audioContext.resume();
       //Create a Buffer Source
       const whiteNoiseSource = audioContext.createBufferSource();
@@ -47,23 +49,21 @@ const App = () => {
 
   }
 
-  const playNoteHandler = () => {   
+  const playNoteHandler = (freq: number) => {   
 
-    // const playNoteHandler = (note: string) => {   
-    // console.log("note", note);
+    console.log("freq", freq);
 
     // Resume audioContext when clicking button
-    console.log("Resume audioContext");
     audioContext.resume();
 
     // Create a Buffer Source
     const sinOscillator = audioContext.createOscillator();
-    sinOscillator.frequency.setValueAtTime(261.6, 0); // Here convert to note
+    sinOscillator.frequency.setValueAtTime(freq, 0); // Here convert to note
 
     // Link Audio Source to Gain control
     sinOscillator.connect(primaryfilter);
     sinOscillator.start();
-    sinOscillator.stop(audioContext.currentTime + 1); // will play for one second.
+    sinOscillator.stop(audioContext.currentTime + 0.2); // will play for one second.
 }
 
   return (
@@ -73,7 +73,7 @@ const App = () => {
           Synth 
         </p>
         <button onClick={playWhiteNoiseHandler}>White Noise</button>
-        <Keyboard playNoteHandler={playNoteHandler}/>
+        <Keyboard playNoteHandler={playNoteHandler} octave={octave}/>
       </header>
     </div>
   );
