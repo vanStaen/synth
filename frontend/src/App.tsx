@@ -6,8 +6,8 @@ import './App.css';
 const App = () => {
 
   const [octave, setOctave] = useState(4);
-  const [volume, setVolume] = useState(4);
-  const [fitlerFreq, setFitlerFreq] = useState(10000);
+  const [volume, setVolume] = useState(0.05);
+  const [fitlerFreq, setFitlerFreq] = useState(5000);
 
   const audioContext = new AudioContext();
 
@@ -20,7 +20,7 @@ const App = () => {
 
   // Create a Gain control (Master Volume)
   const primaryGainControl= audioContext.createGain();
-  primaryGainControl.gain.setValueAtTime(0.05, 0);
+  primaryGainControl.gain.setValueAtTime(volume, 0);
   primaryGainControl.connect(audioContext.destination);
 
 
