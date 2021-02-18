@@ -22,63 +22,52 @@ export enum Notes {
   "Gsharp" = "Ab",
 }
 
+const keyboard = {
+  a: "C",
+  w: "Csharp",
+  s: "D",
+  e: "Dsharp",
+  d: "E",
+  f: "F",
+  t: "Fsharp",
+  g: "G",
+  z: "Gsharp",
+  h: "A",
+  u: "Asharp",
+  j: "B",
+};
+
 type KeyboardProps = {
   playNoteHandler: (freq: number) => void;
   octave: number;
 };
 
 const Keyboard = ({ playNoteHandler, octave }: KeyboardProps) => {
-    
   const handleKeyPress = () => {
-    let listener = (e: any) => {
-
-      switch (e.key) {
-        case "a":
-          playNoteHandler(noteToFrequency(Notes.C, octave));
-          break;
-        case "w":
-          playNoteHandler(noteToFrequency(Notes.Csharp, octave));
-          break;
-        case "s":
-          playNoteHandler(noteToFrequency(Notes.D, octave));
-          break;
-        case "e":
-          playNoteHandler(noteToFrequency(Notes.Dsharp, octave));
-          break;
-        case "d":
-          playNoteHandler(noteToFrequency(Notes.E, octave));
-          break;
-        case "f":
-          playNoteHandler(noteToFrequency(Notes.F, octave));
-          break;
-        case "t":
-          playNoteHandler(noteToFrequency(Notes.Fsharp, octave));
-          break;
-        case "g":
-          playNoteHandler(noteToFrequency(Notes.G, octave));
-          break;
-        case "z":
-          playNoteHandler(noteToFrequency(Notes.Gsharp, octave));
-          break;
-        case "h":
-          playNoteHandler(noteToFrequency(Notes.A, octave));
-          break;
-        case "u":
-          playNoteHandler(noteToFrequency(Notes.Asharp, octave));
-          break;
-        case "j":
-          playNoteHandler(noteToFrequency(Notes.B, octave));
-          break;
-        default:
-          break;
-      }
+    const keydownhandler = (e: KeyboardEvent) => {
+      const keyPressed = String(e.key);
+      // Start sound
+      
+      // change taste css
+      var element = document.getElementById(keyboard["a"]);
+      element && element.classList.add("white__pressed");
     };
 
-    document.addEventListener("keypress", listener);
+    const keyuphandler = (e: KeyboardEvent) => {
+      // Start sound
+
+      // change taste css
+      var element = document.getElementById("C");
+      element && element.classList.remove("white__pressed");
+    };
+
+    document.addEventListener("keydown", keydownhandler);
+    document.addEventListener("keyup", keyuphandler);
 
     // cleanup function
     return () => {
-      document.removeEventListener("keypress", listener);
+      document.removeEventListener("keydown", keydownhandler);
+      document.removeEventListener("keyup", keyuphandler);
     };
   };
 
@@ -88,22 +77,22 @@ const Keyboard = ({ playNoteHandler, octave }: KeyboardProps) => {
     <div>
       <ul className="set">
         <li
-          key="C"
+          id="C"
           className="white e"
           onClick={() => playNoteHandler(noteToFrequency(Notes.C, octave))}
         ></li>
         <li
-          key="C#"
+          id="Csharp"
           className="black ds"
           onClick={() => playNoteHandler(noteToFrequency(Notes.Csharp, octave))}
         ></li>
         <li
-          key="D"
+          id="D"
           className="white d"
           onClick={() => playNoteHandler(noteToFrequency(Notes.D, octave))}
         ></li>
         <li
-          key="D#"
+          id="Dsharp"
           className="black cs"
           onClick={() => playNoteHandler(noteToFrequency(Notes.Dsharp, octave))}
         ></li>

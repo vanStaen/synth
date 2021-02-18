@@ -63,7 +63,11 @@ const App = () => {
     // Link Audio Source to Gain control
     sinOscillator.connect(primaryfilter);
     sinOscillator.start();
-    sinOscillator.stop(audioContext.currentTime + 0.2); // will play for one second.
+    
+    //sinOscillator.stop(audioContext.currentTime + 0.2); // will play for one second. 
+    // ON KEY DOWN OSC ERZEUGEN, UND CONNECT, IN EINE MAP SPEICHERN
+    // ON KEY UP, STOP OSC, (UND EVENTUEL VOM MAP)
+
 }
 
   return (
