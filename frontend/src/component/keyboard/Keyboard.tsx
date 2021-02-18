@@ -43,22 +43,22 @@ type KeyboardProps = {
 };
 
 const Keyboard = ({ playNoteHandler, octave }: KeyboardProps) => {
+
   const handleKeyPress = () => {
+
     const keydownhandler = (e: KeyboardEvent) => {
       const keyPressed = String(e.key);
-      // Start sound
-      
-      // change taste css
       var element = document.getElementById(keyboard["a"]);
       element && element.classList.add("white__pressed");
+      // Start sound
+      playNoteHandler(noteToFrequency(Notes.C, octave));
     };
 
     const keyuphandler = (e: KeyboardEvent) => {
-      // Start sound
-
-      // change taste css
-      var element = document.getElementById("C");
+      const keyPressed = String(e.key);
+      var element = document.getElementById(keyboard["a"]);
       element && element.classList.remove("white__pressed");
+      // Stop sound
     };
 
     document.addEventListener("keydown", keydownhandler);
@@ -97,42 +97,42 @@ const Keyboard = ({ playNoteHandler, octave }: KeyboardProps) => {
           onClick={() => playNoteHandler(noteToFrequency(Notes.Dsharp, octave))}
         ></li>
         <li
-          key="E"
+          id="E"
           className="white c"
           onClick={() => playNoteHandler(noteToFrequency(Notes.E, octave))}
         ></li>
         <li
-          key="F"
+          id="F"
           className="white b"
           onClick={() => playNoteHandler(noteToFrequency(Notes.F, octave))}
         ></li>
         <li
-          key="F#"
+          id="Fsharp"
           className="black as"
           onClick={() => playNoteHandler(noteToFrequency(Notes.Fsharp, octave))}
         ></li>
         <li
-          key="G"
+          id="G"
           className="white a"
           onClick={() => playNoteHandler(noteToFrequency(Notes.G, octave))}
         ></li>
         <li
-          key="G#"
+          id="Gsharp"
           className="black gs"
           onClick={() => playNoteHandler(noteToFrequency(Notes.Gsharp, octave))}
         ></li>
         <li
-          key="A"
+          id="A"
           className="white g"
           onClick={() => playNoteHandler(noteToFrequency(Notes.A, octave))}
         ></li>
         <li
-          key="A#"
+          id="Asharp"
           className="black fs"
           onClick={() => playNoteHandler(noteToFrequency(Notes.Asharp, octave))}
         ></li>
         <li
-          key="B"
+          id="B"
           className="white f"
           onClick={() => playNoteHandler(noteToFrequency(Notes.B, octave))}
         ></li>
