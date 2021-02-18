@@ -7,7 +7,7 @@ const App = () => {
 
   const [octave, setOctave] = useState(4);
   const [volume, setVolume] = useState(0.05);
-  const [fitlerFreq, setFitlerFreq] = useState(5000);
+  const [fitlerFreq, setFitlerFreq] = useState(5000);  
 
   const audioContext = new AudioContext();
 

@@ -28,9 +28,9 @@ type KeyboardProps = {
 };
 
 const Keyboard = ({ playNoteHandler, octave }: KeyboardProps) => {
+    
   const handleKeyPress = () => {
     let listener = (e: any) => {
-      console.log(e);
 
       switch (e.key) {
         case "a":
