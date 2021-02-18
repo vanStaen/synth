@@ -53,8 +53,6 @@ const App = () => {
 
   const playNoteHandler = (freq: number) => {   
 
-    console.log("freq", freq);
-
     // Resume audioContext when clicking button
     audioContext.resume();
 
