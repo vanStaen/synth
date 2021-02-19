@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import knob from './knob.svg';
 import "./Knob.css";
 
@@ -9,12 +10,20 @@ type KnobProps = {
 
 const Knob  = ({ value, valueSetter, knobName }: KnobProps) => {
 
+    const [showValue, setShowValue] = useState(false);
+
     return (
-        <div className="knob">
-            <img src={knob} alt="knob" />
-            { knobName.length === 1 ?
-                (<span className="knob__bigName" >{knobName}</span>) :
-                (<span className="knob__name" >{knobName}</span>)
+        <div 
+            className="knob"        
+            onMouseEnter={() => setShowValue(true)}
+            onMouseLeave={() => setShowValue(false)}
+        >
+            <img src={knob} alt="knob" className="knob__logo"/>
+            {showValue ? 
+                (<span className="knob__value">{(value*10).toFixed(2)}</span>) : 
+                    knobName.length === 1 ?
+                        (<span className="knob__specialchar" >{knobName}</span>) :
+                        (<span className="knob__name" >{knobName}</span>)
             }
         </div>
     )
