@@ -7,7 +7,7 @@ import "./App.css";
 const App = () => {
   const [octave, setOctave] = useState(4);
   const [mainVolume, setMainVolume] = useState(0.05);
-  const [noiseVolume, setNoiseVolume] = useState(0);
+  const [noiseVolume, setNoiseVolume] = useState(.7);
   const [sineVolume, setSineVolume] = useState(1);
   const [fitlerFreq, setFitlerFreq] = useState(5000); // from 25hz to 25000hz
 
