@@ -2,7 +2,7 @@ import "./Keyboard.css";
 import noteToFrequency from "../../helper/noteToFrequency";
 import { useEffect } from "react";
 
-export enum Notes {
+enum Notes {
   "Aflat" = "Ab",
   "A" = "A",
   "Asharp" = "Bb",
@@ -22,20 +22,20 @@ export enum Notes {
   "Gsharp" = "Ab",
 }
 
-const keyboard = {
-  a: "C",
-  w: "Csharp",
-  s: "D",
-  e: "Dsharp",
-  d: "E",
-  f: "F",
-  t: "Fsharp",
-  g: "G",
-  z: "Gsharp",
-  h: "A",
-  u: "Asharp",
-  j: "B",
-};
+const keyboardToNote: { [note: string]: string } = {
+  "a" : "C",
+  "w" : "Csharp",
+  "s" : "D",
+  "e" : "Dsharp",
+  "d" : "E",
+  "f" : "F",
+  "t" : "Fsharp",
+  "g" : "G",
+  "z" : "Gsharp",
+  "h" : "A",
+  "u" : "Asharp",
+  "j" : "B",
+}
 
 type KeyboardProps = {
   playNoteHandler: (freq: number) => void;
@@ -43,21 +43,25 @@ type KeyboardProps = {
 };
 
 const Keyboard = ({ playNoteHandler, octave }: KeyboardProps) => {
-
   const handleKeyPress = () => {
-
     const keydownhandler = (e: KeyboardEvent) => {
-      const keyPressed = String(e.key);
-      var element = document.getElementById(keyboard["a"]);
-      element && element.classList.add("white__pressed");
+      const keyPressed = e.key;
+      var element = document.getElementById(keyboardToNote[keyPressed]);
+      element && ( keyboardToNote[keyPressed].includes("sharp") ? 
+      element.classList.add("black__pressed") : 
+      element.classList.add("white__pressed") )
+    
       // Start sound
       playNoteHandler(noteToFrequency(Notes.C, octave));
     };
 
     const keyuphandler = (e: KeyboardEvent) => {
-      const keyPressed = String(e.key);
-      var element = document.getElementById(keyboard["a"]);
-      element && element.classList.remove("white__pressed");
+      const keyPressed = e.key;
+      var element = document.getElementById(keyboardToNote[keyPressed]);
+      element && ( keyboardToNote[keyPressed].includes("sharp") ? 
+      element.classList.remove("black__pressed") : 
+      element.classList.remove("white__pressed") )
+
       // Stop sound
     };
 
