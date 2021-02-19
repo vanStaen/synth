@@ -1,0 +1,16 @@
+.knob {
+    height: 5em;
+    width: 5em;
+    margin: 0 10px;
+    display: inline-block;
+  }
+
+.knob__name {
+    font-size: .6em;
+    max-width: 5em;
+    text-transform: capitalize;
+}
+
+.knob__bigName {
+    font-size: 1em;
+}
