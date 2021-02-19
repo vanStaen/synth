@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Keyboard from './component/keyboard/Keyboard';
 
 import './App.css';
@@ -11,18 +11,10 @@ const App = () => {
 
   const audioContext = new AudioContext();
 
-  // First paramter = number of chanel (1 for mono, 2 for duo <-> Stero or polyphony)
-  const buffer = audioContext.createBuffer(
-    1,
-    audioContext.sampleRate * 1,
-    audioContext.sampleRate,
-  )
-
   // Create a Gain control (Master Volume)
   const primaryGainControl= audioContext.createGain();
   primaryGainControl.gain.setValueAtTime(volume, 0);
   primaryGainControl.connect(audioContext.destination);
-
 
   // Create a filter (LP)
   const primaryfilter = audioContext.createBiquadFilter();
@@ -33,42 +25,43 @@ const App = () => {
 
   const playWhiteNoiseHandler = () => {   
 
-      // Represente 1 second of audio. 
+      // First paramter = number of chanel (1 for mono, 2 for duo <-> Stero or polyphony)
+      const buffer = audioContext.createBuffer(
+        1,
+        audioContext.sampleRate * 1,
+        audioContext.sampleRate,
+      )
       const channelData = buffer.getChannelData(0);
-
-      // Create white noise by assigning random value between -1 and 1
       for (let i = 0; i < buffer.length;i++) {
         channelData[i] = Math.random() * 2 - 1;
       }  
-      //Resume audioContext when clicking button
       audioContext.resume();
-      //Create a Buffer Source
       const whiteNoiseSource = audioContext.createBufferSource();
       whiteNoiseSource.buffer = buffer;
-      //Link Audio Source to Gain control
       whiteNoiseSource.connect(primaryfilter);
       whiteNoiseSource.start();
 
   }
 
-  const playNoteHandler = (freq: number) => {   
+  const oscMap = new Map();
 
-    // Resume audioContext when clicking button
-    audioContext.resume();
+  const playNoteHandler = (freq: number) => {  
+      if (!oscMap.has(freq)) {
+        audioContext.resume();
+        const sinOscillator = audioContext.createOscillator();
+        sinOscillator.frequency.setValueAtTime(freq, 0);
+        sinOscillator.connect(primaryfilter);
+        sinOscillator.start();    
+        oscMap.set(freq, sinOscillator);
+      } 
+    }
 
-    // Create a Buffer Source
-    const sinOscillator = audioContext.createOscillator();
-    sinOscillator.frequency.setValueAtTime(freq, 0); // Here convert to note
-
-    // Link Audio Source to Gain control
-    sinOscillator.connect(primaryfilter);
-    sinOscillator.start();
-    
-    sinOscillator.stop(audioContext.currentTime + 0.2); // will play for one second. 
-    // ON KEY DOWN OSC ERZEUGEN, UND CONNECT, IN EINE MAP SPEICHERN
-    // ON KEY UP, STOP OSC, (UND EVENTUEL VOM MAP)
-
-}
+  const stopNoteHandler = (freq: number) => {    
+    const sinOscillator = oscMap.get(freq);
+    sinOscillator.stop(audioContext.currentTime + 0.1);
+    sinOscillator.disconnect(primaryfilter);
+    oscMap.delete(freq);
+  }
 
   return (
     <div className="App">
@@ -77,7 +70,10 @@ const App = () => {
           Synth 
         </p>
         <button onClick={playWhiteNoiseHandler}>White Noise</button>
-        <Keyboard playNoteHandler={playNoteHandler} octave={octave}/>
+        <Keyboard 
+          playNoteHandler={playNoteHandler} 
+          stopNoteHandler={stopNoteHandler} 
+          octave={octave}/>
       </header>
     </div>
   );
