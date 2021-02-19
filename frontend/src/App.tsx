@@ -43,25 +43,28 @@ const App = () => {
 
   }
 
-  const oscMap = new Map();
+  const oscGainMap = new Map();
 
   const playNoteHandler = (freq: number) => {  
-    if (!oscMap.has(freq)) {
+    if (!oscGainMap.has(freq)) {
       audioContext.resume();
+      const sinOscillatorGain = audioContext.createGain();
+      sinOscillatorGain.gain.setValueAtTime(1, 0);
+      sinOscillatorGain.connect(primaryfilter);
       const sinOscillator = audioContext.createOscillator();
       sinOscillator.frequency.setValueAtTime(freq, 0);
-      sinOscillator.connect(primaryfilter);
+      sinOscillator.connect(sinOscillatorGain);
       sinOscillator.start();    
-      oscMap.set(freq, sinOscillator);
+      oscGainMap.set(freq, sinOscillatorGain);
     } 
   }
 
   const stopNoteHandler = (freq: number) => {  
-    if (oscMap.has(freq)) {  
-      const sinOscillator = oscMap.get(freq);
-      sinOscillator.stop(audioContext.currentTime + 0.1);
-      sinOscillator.disconnect(primaryfilter);
-      oscMap.delete(freq);
+    if (oscGainMap.has(freq)) {  
+      const sinOscillatorGain = oscGainMap.get(freq);
+      sinOscillatorGain.gain.setValueAtTime(sinOscillatorGain.gain.value, audioContext.currentTime); 
+      sinOscillatorGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.03);
+      oscGainMap.delete(freq);
     }
   }
 
