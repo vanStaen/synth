@@ -17,6 +17,8 @@
 
 .knob__value {
     font-size: .6em;
+    padding: .2em .5em;
+    background-color: rgba(111, 18, 13, 0.66);
 }
 
 .knob__logo {
