@@ -85,62 +85,74 @@ const Keyboard = ({ playNoteHandler, stopNoteHandler, octave }: KeyboardProps) =
         <li
           id="C"
           className="white e"
-          onClick={() => playNoteHandler(noteToFrequency(notes["C"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["C"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["C"], octave))}
         ></li>
         <li
           id="Csharp"
           className="black ds"
-          onClick={() => playNoteHandler(noteToFrequency(notes["Csharp"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["Csharp"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["Csharp"], octave))}
         ></li>
         <li
           id="D"
           className="white d"
-          onClick={() => playNoteHandler(noteToFrequency(notes["D"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["D"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["D"], octave))}
         ></li>
         <li
           id="Dsharp"
           className="black cs"
-          onClick={() => playNoteHandler(noteToFrequency(notes["Dsharp"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["Dsharp"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["Dsharp"], octave))}
         ></li>
         <li
           id="E"
           className="white c"
-          onClick={() => playNoteHandler(noteToFrequency(notes["E"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["E"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["E"], octave))}
         ></li>
         <li
           id="F"
           className="white b"
-          onClick={() => playNoteHandler(noteToFrequency(notes["F"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["F"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["F"], octave))}
         ></li>
         <li
           id="Fsharp"
           className="black as"
-          onClick={() => playNoteHandler(noteToFrequency(notes["Fsharp"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["Fsharp"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["Fsharp"], octave))}
         ></li>
         <li
           id="G"
           className="white a"
-          onClick={() => playNoteHandler(noteToFrequency(notes["G"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["G"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["G"], octave))}
         ></li>
         <li
           id="Gsharp"
           className="black gs"
-          onClick={() => playNoteHandler(noteToFrequency(notes["Gsharp"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["Gsharp"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["Gsharp"], octave))}
         ></li>
         <li
           id="A"
           className="white g"
-          onClick={() => playNoteHandler(noteToFrequency(notes["A"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["A"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["A"], octave))}
         ></li>
         <li
           id="Asharp"
           className="black fs"
-          onClick={() => playNoteHandler(noteToFrequency(notes["Asharp"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["Asharp"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["Asharp"], octave))}
         ></li>
         <li
           id="B"
           className="white f"
-          onClick={() => playNoteHandler(noteToFrequency(notes["B"], octave))}
+          onMouseDown={() => playNoteHandler(noteToFrequency(notes["B"], octave))}
+          onMouseUp={() => stopNoteHandler(noteToFrequency(notes["B"], octave))}
         ></li>
       </ul>
     </div>
