@@ -46,25 +46,25 @@ type KeyboardProps = {
 const Keyboard = ({ playNoteHandler, stopNoteHandler, octave }: KeyboardProps) => {
   const handleKeyPress = () => {
     const keydownhandler = (e: KeyboardEvent) => {
-      const keyPressed = e.key;
-      var element = document.getElementById(keyboardToNote[keyPressed]);
-      element && ( keyboardToNote[keyPressed].includes("sharp") ? 
-      element.classList.add("black__pressed") : 
-      element.classList.add("white__pressed") )
-      // Start sound
-      keyboardToNote[keyPressed] &&
-      playNoteHandler(noteToFrequency(notes[keyboardToNote[keyPressed]], octave));
+      const keyPressed = e.key.toLowerCase();
+      if (keyPressed in keyboardToNote) {
+        var element = document.getElementById(keyboardToNote[keyPressed]);
+        element && ( keyboardToNote[keyPressed].includes("sharp") ? 
+        element.classList.add("black__pressed") : 
+        element.classList.add("white__pressed") )
+        playNoteHandler(noteToFrequency(notes[keyboardToNote[keyPressed]], octave));
+      }
     };
 
     const keyuphandler = (e: KeyboardEvent) => {
-      const keyPressed = e.key;
-      var element = document.getElementById(keyboardToNote[keyPressed]);
-      element && ( keyboardToNote[keyPressed].includes("sharp") ? 
-      element.classList.remove("black__pressed") :
-      element.classList.remove("white__pressed") )
-      // Stop sound
-      keyboardToNote[keyPressed] &&
-      stopNoteHandler(noteToFrequency(notes[keyboardToNote[keyPressed]], octave));
+      const keyPressed = e.key.toLowerCase();
+      if (keyPressed in keyboardToNote) {
+        var element = document.getElementById(keyboardToNote[keyPressed]);
+        element && ( keyboardToNote[keyPressed].includes("sharp") ? 
+        element.classList.remove("black__pressed") :
+        element.classList.remove("white__pressed") )
+        stopNoteHandler(noteToFrequency(notes[keyboardToNote[keyPressed]], octave));
+      }
     };
 
     document.addEventListener("keydown", keydownhandler);

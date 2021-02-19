@@ -46,21 +46,23 @@ const App = () => {
   const oscMap = new Map();
 
   const playNoteHandler = (freq: number) => {  
-      if (!oscMap.has(freq)) {
-        audioContext.resume();
-        const sinOscillator = audioContext.createOscillator();
-        sinOscillator.frequency.setValueAtTime(freq, 0);
-        sinOscillator.connect(primaryfilter);
-        sinOscillator.start();    
-        oscMap.set(freq, sinOscillator);
-      } 
-    }
+    if (!oscMap.has(freq)) {
+      audioContext.resume();
+      const sinOscillator = audioContext.createOscillator();
+      sinOscillator.frequency.setValueAtTime(freq, 0);
+      sinOscillator.connect(primaryfilter);
+      sinOscillator.start();    
+      oscMap.set(freq, sinOscillator);
+    } 
+  }
 
-  const stopNoteHandler = (freq: number) => {    
-    const sinOscillator = oscMap.get(freq);
-    sinOscillator.stop(audioContext.currentTime + 0.1);
-    sinOscillator.disconnect(primaryfilter);
-    oscMap.delete(freq);
+  const stopNoteHandler = (freq: number) => {  
+    if (oscMap.has(freq)) {  
+      const sinOscillator = oscMap.get(freq);
+      sinOscillator.stop(audioContext.currentTime + 0.1);
+      sinOscillator.disconnect(primaryfilter);
+      oscMap.delete(freq);
+    }
   }
 
   return (
