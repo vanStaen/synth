@@ -7,9 +7,9 @@ import "./App.css";
 const App = () => {
   const [octave, setOctave] = useState(3);
   const [mainVolume, setMainVolume] = useState(0.05);
-  const [noiseVolume, setNoiseVolume] = useState(.1);
-  const [sineVolume, setSineVolume] = useState(.3);
-  const [squareVolume, setSquareVolume] = useState(.6);
+  const [noiseVolume, setNoiseVolume] = useState(.5);
+  const [sineVolume, setSineVolume] = useState(1);
+  const [squareVolume, setSquareVolume] = useState(1)
   const [fitlerFreq, setFitlerFreq] = useState(5000); // from 25hz to 25000hz
 
   const audioContext = new AudioContext();
@@ -75,6 +75,7 @@ const App = () => {
       const whiteNoiseSource = audioContext.createBufferSource();
       whiteNoiseSource.buffer = buffer;
       whiteNoiseSource.connect(noiseGain);
+      whiteNoiseSource.loop = true;
       whiteNoiseSource.start();
 
       // noteGainMap
