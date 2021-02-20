@@ -11,6 +11,7 @@ type KnobProps = {
 const Knob  = ({ value, valueSetter, knobName }: KnobProps) => {
 
     const [showValue, setShowValue] = useState(false);
+    const [knobAngle, setKnobAngle] = useState(0);
 
     return (
         <div 
