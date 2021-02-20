@@ -1,4 +1,5 @@
 import { useState } from "react";
+import vsa from './logos/vsa.svg'
 import Keyboard from "./component/keyboard/Keyboard";
 import Knob from "./component/knob/Knob";
 
@@ -95,7 +96,9 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <p> </p>
+        <div className="App-divLogo">
+          <img src={vsa} alt="vsaLogo" className="App-logo"/>
+        </div>
         <div>
           <Knob value={mainVolume} valueSetter={setMainVolume} knobName="Volume"/>
           <Knob value={noiseVolume} valueSetter={setNoiseVolume} knobName="Noise"/>

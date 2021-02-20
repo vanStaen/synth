@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import knob from './knob.svg';
+import knob from '../../logos/knob.svg';
 import "./Knob.css";
 
 type KnobProps = {
