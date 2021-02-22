@@ -1,5 +1,4 @@
 import { useState } from "react";
-import vsa from './logos/vsa.svg'
 import Keyboard from "./component/keyboard/Keyboard";
 import Knob from "./component/knob/Knob";
 
@@ -26,60 +25,15 @@ const App = () => {
   primaryfilter.frequency.value = fitlerFreq;
   primaryfilter.connect(primaryGainControl);
 
-
   const noteGainMap = new Map();
+
+  // Create all notes
+  // Todo
 
   const playNoteHandler = (freq: number) => {
     if (!noteGainMap.has(freq)) {
       audioContext.resume();
-
-      //Gain
-      const noteGain = audioContext.createGain();
-      noteGain.gain.setValueAtTime(sineVolume, 0);
-      noteGain.connect(primaryfilter);
-
-      //Sinus
-      const sinGain = audioContext.createGain();
-      sinGain.gain.setValueAtTime(sineVolume, 0);
-      sinGain.connect(noteGain);
-      const sinOscillator = audioContext.createOscillator();
-      sinOscillator.frequency.setValueAtTime(freq, 0);
-      sinOscillator.type = 'sine';
-      sinOscillator.connect(sinGain);
-      sinOscillator.start();
-
-
-      //Square
-      const squareGain = audioContext.createGain();
-      squareGain.gain.setValueAtTime(squareVolume, 0);
-      squareGain.connect(noteGain);
-      const squareOscillator = audioContext.createOscillator();
-      squareOscillator.frequency.setValueAtTime(freq, 0);
-      squareOscillator.type = 'square';
-      squareOscillator.connect(squareGain);
-      squareOscillator.start();
-
-      //Noise
-      const buffer = audioContext.createBuffer(
-        1,
-        audioContext.sampleRate * 1,
-        audioContext.sampleRate
-      );
-      const channelData = buffer.getChannelData(0);
-      for (let i = 0; i < buffer.length; i++) {
-        channelData[i] = Math.random() * 2 - 1;
-      }
-      audioContext.resume();
-      const noiseGain = audioContext.createGain();
-      noiseGain.gain.setValueAtTime(noiseVolume, 0);
-      noiseGain.connect(noteGain);
-      const whiteNoiseSource = audioContext.createBufferSource();
-      whiteNoiseSource.buffer = buffer;
-      whiteNoiseSource.connect(noiseGain);
-      whiteNoiseSource.loop = true;
-      whiteNoiseSource.start();
-
-      // noteGainMap
+      const noteGain = noteGainMap.get(freq);
       noteGainMap.set(freq, noteGain);
     }
   };
@@ -87,23 +41,20 @@ const App = () => {
   const stopNoteHandler = (freq: number) => {
     if (noteGainMap.has(freq)) {
       const noteGain = noteGainMap.get(freq);
-      noteGain.gain.setValueAtTime(noteGain.gain.value,audioContext.currentTime);
+      noteGain.gain.setValueAtTime(noteGain.gain.value, audioContext.currentTime);
       noteGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.03);
-      noteGainMap.delete(freq);
     }
   };
 
   return (
     <div className="App">
       <header className="App-header">
-        <div className="App-divLogo">
-          <img src={vsa} alt="vsaLogo" className="App-logo"/>
-        </div>
+        <p> </p>
         <div>
-          <Knob value={mainVolume} valueSetter={setMainVolume} knobName="Volume"/>
-          <Knob value={noiseVolume} valueSetter={setNoiseVolume} knobName="Noise"/>
-          <Knob value={sineVolume} valueSetter={setSineVolume} knobName="∿"/>
-          <Knob value={fitlerFreq} valueSetter={setFitlerFreq} knobName="LP Filter"/>
+          <Knob value={mainVolume} valueSetter={setMainVolume} knobName="Volume" />
+          <Knob value={noiseVolume} valueSetter={setNoiseVolume} knobName="Noise" />
+          <Knob value={sineVolume} valueSetter={setSineVolume} knobName="∿" />
+          <Knob value={fitlerFreq} valueSetter={setFitlerFreq} knobName="LP Filter" />
         </div>
         <Keyboard
           playNoteHandler={playNoteHandler}
