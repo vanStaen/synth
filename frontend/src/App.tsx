@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { note } from "./component/note/note";
+import { noteStore } from "./store/store";
 import Keyboard from "./component/keyboard/Keyboard";
 import Knob from "./component/knob/Knob";
 
@@ -25,12 +27,19 @@ const App = () => {
   primaryfilter.frequency.value = fitlerFreq;
   primaryfilter.connect(primaryGainControl);
 
-  const noteGainMap = new Map();
-
   // Create all notes
-  // Todo
+  note({
+    freq: 440,
+    name: "C4",
+    audioContext: audioContext,
+    primaryfilter: primaryfilter,
+    sineVolume: sineVolume,
+    squareVolume: squareVolume,
+    noiseVolume: noiseVolume,
+    noteStore: noteStore,
+  })
 
-  const playNoteHandler = (freq: number) => {
+  /* const playNoteHandler = (freq: number) => {
     if (!noteGainMap.has(freq)) {
       audioContext.resume();
       const noteGain = noteGainMap.get(freq);
@@ -44,7 +53,7 @@ const App = () => {
       noteGain.gain.setValueAtTime(noteGain.gain.value, audioContext.currentTime);
       noteGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.03);
     }
-  };
+  };*/
 
   return (
     <div className="App">

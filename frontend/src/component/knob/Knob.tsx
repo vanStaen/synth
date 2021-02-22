@@ -3,9 +3,9 @@ import knob from '../../logos/knob.svg';
 import "./Knob.css";
 
 type KnobProps = {
-    value: number;
-    valueSetter: (value: number) => void;
-    knobName: string;
+    value: number,
+    valueSetter: (value: number) => void,
+    knobName: string,
 };
 
 const Knob = ({ value, valueSetter, knobName }: KnobProps) => {
