@@ -15,7 +15,7 @@ export const note = ({ freq, name, audioContext, primaryfilter, sineVolume, squa
 
     //Gain
     const noteGain = audioContext.createGain();
-    noteGain.gain.setValueAtTime(sineVolume, 0);
+    noteGain.gain.setValueAtTime(0, 0);
     noteGain.connect(primaryfilter);
 
     //Sinus
@@ -57,6 +57,7 @@ export const note = ({ freq, name, audioContext, primaryfilter, sineVolume, squa
     whiteNoise.connect(whiteNoiseGain);
     whiteNoise.loop = true;
     whiteNoise.start();
+
 
     // Add to the Store
     noteStore.addNote(
