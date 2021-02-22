@@ -27,7 +27,7 @@ const App = () => {
   primaryfilter.frequency.value = fitlerFreq;
   primaryfilter.connect(primaryGainControl);
 
-  // Create all notes
+  // Create all notes (check for dupplicxate)
   note({
     freq: 440,
     name: "C4",
@@ -39,21 +39,26 @@ const App = () => {
     noteStore: noteStore,
   })
 
-  /* const playNoteHandler = (freq: number) => {
-    if (!noteGainMap.has(freq)) {
-      audioContext.resume();
-      const noteGain = noteGainMap.get(freq);
-      noteGainMap.set(freq, noteGain);
+  console.log("notes", noteStore.notes);
+
+  const playNoteHandler = (freq: number) => {
+    audioContext.resume();
+    const noteArray = noteStore.notes.find(note => note.freq == 440);
+    if (noteArray) {
+      console.log("noteArray", noteArray);
+      const noteGain = noteArray.noteGain;
+      noteGain.gain.setValueAtTime(1, 0);
     }
   };
 
   const stopNoteHandler = (freq: number) => {
-    if (noteGainMap.has(freq)) {
-      const noteGain = noteGainMap.get(freq);
+    const noteArray = noteStore.notes.find(note => note.freq == 440);
+    if (noteArray) {
+      const noteGain = noteArray.noteGain;
       noteGain.gain.setValueAtTime(noteGain.gain.value, audioContext.currentTime);
       noteGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.03);
     }
-  };*/
+  };
 
   return (
     <div className="App">
