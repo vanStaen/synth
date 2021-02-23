@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { note } from "./component/note/note";
 import { noteStore } from "./store/store";
+import createAllNotes from "./helper/createAllNotes";
 import Keyboard from "./component/keyboard/Keyboard";
 import Knob from "./component/knob/Knob";
 
 import "./App.css";
 
 const App = () => {
-  const [octave, setOctave] = useState(3);
+  const [octave, setOctave] = useState(5);
   const [mainVolume, setMainVolume] = useState(0.05);
   const [noiseVolume, setNoiseVolume] = useState(.5);
   const [sineVolume, setSineVolume] = useState(1);
@@ -28,26 +28,14 @@ const App = () => {
   primaryfilter.connect(primaryGainControl);
 
   useEffect(() => {
-    // Create notes
-    note({
-      freq: 65.41,
-      name: "C4",
-      audioContext: audioContext,
-      primaryfilter: primaryfilter,
-      sineVolume: 1,
-      squareVolume: 1,
-      noiseVolume: 1,
-      noteStore: noteStore,
-    })
+    // Create all notes
+    createAllNotes({ audioContext, primaryfilter, sineVolume, squareVolume, noiseVolume });
   }, [])
-
-  console.log("notes", noteStore.notes);
 
   const playNoteHandler = (freq: number) => {
     audioContext.resume();
     const noteArray = noteStore.notes.find(note => note.freq == freq);
     if (noteArray) {
-      console.log("noteArray", noteArray);
       const noteGain = noteArray.noteGain;
       noteGain.gain.setValueAtTime(1, 0);
     }
