@@ -28,7 +28,7 @@ export default function createAllNotes({ audioContext, primaryfilter, sineVolume
                 noiseVolume: noiseVolume,
                 noteStore: noteStore,
             })
-            console.log("note created", `${noteToCreate}${octave}`, noteToFrequency(noteToCreate, 3));
+            // console.log("note created", `${noteToCreate}${octave}`, noteToFrequency(noteToCreate, 3));
         }
     })
 }

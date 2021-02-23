@@ -9,10 +9,10 @@ import "./App.css";
 const App = () => {
   const [octave, setOctave] = useState(5);
   const [mainVolume, setMainVolume] = useState(0.05);
-  const [noiseVolume, setNoiseVolume] = useState(.5);
+  const [noiseVolume, setNoiseVolume] = useState(.01);
   const [sineVolume, setSineVolume] = useState(1);
   const [squareVolume, setSquareVolume] = useState(1)
-  const [fitlerFreq, setFitlerFreq] = useState(5000); // from 25hz to 25000hz
+  const [fitlerFreq, setFitlerFreq] = useState(5000); // from 30hz to 25000hz
 
   const audioContext = new AudioContext();
 
@@ -31,6 +31,12 @@ const App = () => {
     // Create all notes
     createAllNotes({ audioContext, primaryfilter, sineVolume, squareVolume, noiseVolume });
   }, [])
+
+  useEffect(() => {
+    // Update FilterFrequence
+    console.log("setFitlerFreq", Math.round(fitlerFreq))
+    primaryfilter.frequency.value = Math.round(fitlerFreq);
+  }, [fitlerFreq])
 
   const playNoteHandler = (freq: number) => {
     audioContext.resume();
@@ -55,10 +61,11 @@ const App = () => {
       <header className="App-header">
         <p> </p>
         <div>
-          <Knob value={mainVolume} valueSetter={setMainVolume} knobName="Volume" />
-          <Knob value={noiseVolume} valueSetter={setNoiseVolume} knobName="Noise" />
-          <Knob value={sineVolume} valueSetter={setSineVolume} knobName="∿" />
-          <Knob value={fitlerFreq} valueSetter={setFitlerFreq} knobName="LP Filter" />
+          <Knob value={mainVolume} valueSetter={setMainVolume} knobName="vol" min={0} max={0.1} multiply={1000} />
+          <Knob value={noiseVolume} valueSetter={setNoiseVolume} knobName="noise" min={0.01} max={1} multiply={100} />
+          <Knob value={sineVolume} valueSetter={setSineVolume} knobName="sin" min={0.01} max={1} multiply={100} />
+          <Knob value={squareVolume} valueSetter={setSquareVolume} knobName="square" min={0.01} max={1} multiply={100} />
+          <Knob value={fitlerFreq} valueSetter={setFitlerFreq} knobName="filter" min={30} max={20000} multiply={1} />
         </div>
         <Keyboard
           playNoteHandler={playNoteHandler}

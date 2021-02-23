@@ -3,6 +3,7 @@
     width: 5em;
     margin: 0 10px;
     display: inline-block;
+    
   }
 
 .knob__name {
@@ -21,6 +22,7 @@
     background-color: rgba(111, 18, 13, 0.66);
 }
 
-.knob__logo {
+.knob__image {
     cursor: pointer;
+    transform: rotate(-90deg);
 }
