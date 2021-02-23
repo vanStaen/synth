@@ -1,5 +1,5 @@
 import "./Keyboard.css";
-import noteToFrequency from "../../helper/noteToFrequency";
+import { noteToFrequency } from "../../helper/noteToFrequency";
 import { useEffect } from "react";
 
 const notes: { [note: string]: string } = {
