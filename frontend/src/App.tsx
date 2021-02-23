@@ -52,7 +52,7 @@ const App = () => {
     if (noteArray) {
       const noteGain = noteArray.noteGain;
       noteGain.gain.setValueAtTime(noteGain.gain.value, audioContext.currentTime);
-      noteGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.03);
+      noteGain.gain.exponentialRampToValueAtTime(0.000001, audioContext.currentTime + 0.03);
     }
   };
 
