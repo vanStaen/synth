@@ -25,6 +25,6 @@ const noteToFreqConvertionTable: { [note: string]: notesInAnOctave } = {
 };
 
 export default function noteToFrequency(note: string, octave: number) {
-  const frequency = noteToFreqConvertionTable[note][octave];
+  const frequency = noteToFreqConvertionTable[note][octave - 1];
   return frequency;
 }
