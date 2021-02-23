@@ -11,9 +11,10 @@ type KnobProps = {
     multiply: number,
     valueSetter: (value: number) => void,
     knobName: string,
+    unit: String
 };
 
-const Knob = ({ value, min, max, multiply, valueSetter, knobName }: KnobProps) => {
+const Knob = ({ value, min, max, multiply, valueSetter, knobName, unit }: KnobProps) => {
 
     const [showValue, setShowValue] = useState(false);
     const [knobValue, setKnobValue] = useState(value);
@@ -22,12 +23,10 @@ const Knob = ({ value, min, max, multiply, valueSetter, knobName }: KnobProps) =
     const [knobAngle, setKnobAngle] = useState(0);
 
     useEffect(() => {
-        if (document.getElementById(knobName) !== null) {
-            document.getElementById(knobName).setAttribute('draggable', false);
-        }
+        document.getElementById(knobName)!.setAttribute('draggable', "false");
         setKnobValue(knobValue * multiply);
         const knobRotation = valueToDegree(knobValue, min, max, -90, 310)
-        document.getElementById(knobName).style.setProperty('transform', `rotate(${knobRotation}deg)`);
+        document.getElementById(knobName)!.style.setProperty('transform', `rotate(${knobRotation}deg)`);
     }, [])
 
     const mouseDownHandler = (event: React.MouseEvent) => {
@@ -52,7 +51,7 @@ const Knob = ({ value, min, max, multiply, valueSetter, knobName }: KnobProps) =
             if (movedInPixel < 0) { movedInPixel = 0; }
             const movedInDegree = (movedInPixel * 3.1) - 90; // 315 degre max, with start at - 90
             const newValue = degreeToValue(movedInDegree, min, max, -90, 310);
-            document.getElementById(knobName).style.setProperty('transform', `rotate(${movedInDegree}deg)`);
+            document.getElementById(knobName)!.style.setProperty('transform', `rotate(${movedInDegree}deg)`);
             valueSetter(newValue);
             setKnobValue(Math.round(newValue * multiply));
         }
@@ -75,7 +74,7 @@ const Knob = ({ value, min, max, multiply, valueSetter, knobName }: KnobProps) =
                 onMouseLeave={mouseLeaveHandler}
             />
             {showValue ?
-                (<span className="knob__value">{knobValue}</span>) :
+                (<span className="knob__value">{knobValue}{unit}</span>) :
                 knobName.length === 1 ?
                     (<span className="knob__specialchar" >{knobName}</span>) :
                     (<span className="knob__name" >{knobName}</span>)
