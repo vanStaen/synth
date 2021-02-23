@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { note } from "./component/note/note";
 import { noteStore } from "./store/store";
 import Keyboard from "./component/keyboard/Keyboard";
@@ -27,23 +27,25 @@ const App = () => {
   primaryfilter.frequency.value = fitlerFreq;
   primaryfilter.connect(primaryGainControl);
 
-  // Create all notes (check for dupplicxate)
-  note({
-    freq: 440,
-    name: "C4",
-    audioContext: audioContext,
-    primaryfilter: primaryfilter,
-    sineVolume: sineVolume,
-    squareVolume: squareVolume,
-    noiseVolume: noiseVolume,
-    noteStore: noteStore,
-  })
+  useEffect(() => {
+    // Create notes
+    note({
+      freq: 65.41,
+      name: "C4",
+      audioContext: audioContext,
+      primaryfilter: primaryfilter,
+      sineVolume: 1,
+      squareVolume: 1,
+      noiseVolume: 1,
+      noteStore: noteStore,
+    })
+  }, [])
 
   console.log("notes", noteStore.notes);
 
   const playNoteHandler = (freq: number) => {
     audioContext.resume();
-    const noteArray = noteStore.notes.find(note => note.freq == 440);
+    const noteArray = noteStore.notes.find(note => note.freq == freq);
     if (noteArray) {
       console.log("noteArray", noteArray);
       const noteGain = noteArray.noteGain;
@@ -52,7 +54,7 @@ const App = () => {
   };
 
   const stopNoteHandler = (freq: number) => {
-    const noteArray = noteStore.notes.find(note => note.freq == 440);
+    const noteArray = noteStore.notes.find(note => note.freq == freq);
     if (noteArray) {
       const noteGain = noteArray.noteGain;
       noteGain.gain.setValueAtTime(noteGain.gain.value, audioContext.currentTime);
