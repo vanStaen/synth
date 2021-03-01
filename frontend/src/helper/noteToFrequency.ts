@@ -9,7 +9,7 @@ type notesInAnOctave = [
   number
 ];
 
-export const noteToFreqConvertionTable: { [note: string]: notesInAnOctave } = {
+export const noteToFreqConversionTable: { [note: string]: notesInAnOctave } = {
   C: [16.35, 32.7, 65.41, 130.81, 261.63, 523.25, 1046.5, 2093.0],
   Db: [17.32, 34.65, 69.3, 138.59, 277.18, 554.37, 1108.73, 2217.46],
   D: [18.35, 36.71, 73.42, 146.83, 293.66, 587.33, 1174.66, 2349.32],
@@ -24,7 +24,6 @@ export const noteToFreqConvertionTable: { [note: string]: notesInAnOctave } = {
   B: [30.87, 61.74, 123.47, 246.94, 493.88, 987.77, 1975.53, 3951.07],
 };
 
-export function noteToFrequency(note: string, octave: number) {
-  const frequency = noteToFreqConvertionTable[note][octave - 1];
-  return frequency;
+export function noteToFrequency(note: string, octave: number): number {
+  return noteToFreqConversionTable[note][octave - 1];
 }

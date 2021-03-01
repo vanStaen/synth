@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { degreeToValue } from '../../helper/degreeToValue';
 import { valueToDegree } from '../../helper/valueToDegree';
 import knob from '../../logos/knob.svg';
@@ -14,7 +14,8 @@ type KnobProps = {
     unit: String
 };
 
-const Knob = ({ value, min, max, multiply, valueSetter, knobName, unit }: KnobProps) => {
+const Knob = (props: KnobProps) => {
+    const { value, min, max, multiply, valueSetter, knobName, unit } = props;
 
     const [showValue, setShowValue] = useState(false);
     const [knobValue, setKnobValue] = useState(value);
@@ -27,36 +28,42 @@ const Knob = ({ value, min, max, multiply, valueSetter, knobName, unit }: KnobPr
         setKnobValue(knobValue * multiply);
         const knobRotation = valueToDegree(knobValue, min, max, -90, 310)
         document.getElementById(knobName)!.style.setProperty('transform', `rotate(${knobRotation}deg)`);
-    }, [])
+    }, [knobName, knobValue, setKnobValue, multiply, min, max]);
 
-    const mouseDownHandler = (event: React.MouseEvent) => {
+    const mouseDownHandler = useCallback((event: React.MouseEvent) => {
         setOriginalClientY(event.clientY);
         setMouseIsDown(true);
-    }
+    }, [setOriginalClientY, setMouseIsDown]);
 
-    const mouseUpHandler = (event: React.MouseEvent) => {
+    const mouseUpHandler = useCallback(() => {
         setOriginalClientY(0);
         setMouseIsDown(false);
-    }
+    }, [setOriginalClientY, setMouseIsDown]);
 
-    const mouseLeaveHandler = (event: React.MouseEvent) => {
-        !mouseIsDown && setOriginalClientY(0);
-    }
+    const mouseLeaveHandler = useCallback(() => {
+        if (!mouseIsDown) {
+            setOriginalClientY(0);
+        }
+    }, [mouseIsDown, setOriginalClientY]);
 
-    const mouseMoveHandler = (event: React.MouseEvent) => {
+    const mouseMoveHandler = useCallback((event: React.MouseEvent) => {
         if (originalClientY !== 0 && mouseIsDown) {
             const newClientY = event.clientY;
             let movedInPixel = (originalClientY - newClientY) + 50;
-            if (movedInPixel > 100) { movedInPixel = 100; }
-            if (movedInPixel < 0) { movedInPixel = 0; }
-            const movedInDegree = (movedInPixel * 3.1) - 90; // 315 degre max, with start at - 90
+            if (movedInPixel > 100) {
+                movedInPixel = 100;
+            }
+            if (movedInPixel < 0) {
+                movedInPixel = 0;
+            }
+            const movedInDegree = (movedInPixel * 3.1) - 90; // 315 degree max, with start at - 90
             const newValue = degreeToValue(movedInDegree, min, max, -90, 310);
+
             document.getElementById(knobName)!.style.setProperty('transform', `rotate(${movedInDegree}deg)`);
             valueSetter(newValue);
             setKnobValue(Math.round(newValue * multiply));
         }
-    }
-
+    }, [originalClientY, mouseIsDown, min, max, multiply, knobName, valueSetter]);
 
     return (
         <div
@@ -73,11 +80,14 @@ const Knob = ({ value, min, max, multiply, valueSetter, knobName, unit }: KnobPr
                 onMouseUp={mouseUpHandler}
                 onMouseLeave={mouseLeaveHandler}
             />
-            {showValue ?
-                (<span className="knob__value">{knobValue}{unit}</span>) :
-                knobName.length === 1 ?
-                    (<span className="knob__specialchar" >{knobName}</span>) :
-                    (<span className="knob__name" >{knobName}</span>)
+            {showValue ? (
+              <span className="knob__value">{knobValue}{unit}</span>
+            ) :
+                knobName.length === 1 ? (
+                  <span className="knob__specialchar">{knobName}</span>
+                ) : (
+                  <span className="knob__name">{knobName}</span>
+                )
             }
         </div>
     )

@@ -1,4 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
+import { NoteConfig, createAllNotes } from './createAllNotes';
 
 export interface noteData {
     freq: number,
@@ -12,7 +13,7 @@ export interface noteData {
     whiteNoiseGain: GainNode
 };
 
-export class NoteStoreImplementation {
+export class NoteStore {
 
     notes: noteData[] = [];
 
@@ -21,6 +22,10 @@ export class NoteStoreImplementation {
             notes: observable,
             addNote: action,
         });
+    }
+
+    createAllNotes(noteConfig: NoteConfig) {
+        createAllNotes(this, noteConfig);
     }
 
     addNote(
@@ -50,4 +55,4 @@ export class NoteStoreImplementation {
     }
 }
 
-export const noteStore = new NoteStoreImplementation();
+export const noteStore = new NoteStore();
