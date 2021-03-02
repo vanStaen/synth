@@ -15,6 +15,15 @@ const keyboardToNote: { [key: string]: string } = {
   "h": "A",
   "u": "Bb",
   "j": "B",
+  "k": "C",
+  "o": "Db",
+  "l": "D",
+  "p": "Eb",
+  "ö": "E",
+  "ü": "F",
+  "ä": "Gb",
+  "+": "G",
+  "#": "Ab",
 }
 
 function toggleClass(keyPressed: string, addClass: boolean) {
