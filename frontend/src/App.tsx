@@ -8,7 +8,7 @@ import "./App.css";
 const App = () => {
   const [octave, setOctave] = useState(5);
   const [mainVolume, setMainVolume] = useState(0.05);
-  const [noiseVolume, setNoiseVolume] = useState(.01);
+  const [noiseVolume, setNoiseVolume] = useState(1);
   const [sineVolume, setSineVolume] = useState(1);
   const [squareVolume, setSquareVolume] = useState(1)
   const [filterFreq, setFilterFreq] = useState(5000); // from 30hz to 25000hz
@@ -35,12 +35,13 @@ const App = () => {
 
   useEffect(() => {
     // Update FilterFrequence
-    console.log("setFilterFreq", Math.round(filterFreq))
     primaryFilter.frequency.value = Math.round(filterFreq);
   }, [filterFreq])
 
   const playNoteHandler = useCallback((freq: number) => {
+
     audioContext.resume();
+
     const noteArray = noteStore.notes.find(note => note.freq == freq);
     if (noteArray) {
       const noteGain = noteArray.noteGain;
