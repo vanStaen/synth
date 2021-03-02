@@ -21,14 +21,13 @@ const Knob = (props: KnobProps) => {
     const [knobValue, setKnobValue] = useState(value);
     const [originalClientY, setOriginalClientY] = useState(0);
     const [mouseIsDown, setMouseIsDown] = useState(false);
-    const [knobAngle, setKnobAngle] = useState(0);
 
     useEffect(() => {
         document.getElementById(knobName)!.setAttribute('draggable', "false");
         setKnobValue(knobValue * multiply);
         const knobRotation = valueToDegree(knobValue, min, max, -90, 310)
         document.getElementById(knobName)!.style.setProperty('transform', `rotate(${knobRotation}deg)`);
-    }, [knobName, knobValue, setKnobValue, multiply, min, max]);
+    }, [knobName, setKnobValue, multiply, min, max]);
 
     const mouseDownHandler = useCallback((event: React.MouseEvent) => {
         setOriginalClientY(event.clientY);
