@@ -38,14 +38,23 @@ const App = () => {
     primaryFilter.frequency.value = Math.round(filterFreq);
   }, [filterFreq])
 
+  /* useEffect(() => {
+    // Update primaryGain
+    primaryGainControl.gain.setValueAtTime(mainVolume, audioContext.currentTime);
+  }, [mainVolume]) */
+
   const playNoteHandler = useCallback((freq: number) => {
-
     audioContext.resume();
-
     const noteArray = noteStore.notes.find(note => note.freq == freq);
     if (noteArray) {
       const noteGain = noteArray.noteGain;
-      noteGain.gain.setValueAtTime(1, 0);
+      noteGain.gain.setValueAtTime(1, audioContext.currentTime);
+      const sineGain = noteArray.sinGain;
+      sineGain.gain.setValueAtTime(sineVolume, audioContext.currentTime);
+      const squareGain = noteArray.squareGain;
+      squareGain.gain.setValueAtTime(squareVolume, audioContext.currentTime);
+      const whiteNoiseGain = noteArray.whiteNoiseGain;
+      whiteNoiseGain.gain.setValueAtTime(noiseVolume, audioContext.currentTime);
     }
   }, [noteStore.notes, audioContext]);
 
