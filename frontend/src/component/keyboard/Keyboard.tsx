@@ -1,6 +1,7 @@
 import "./Keyboard.css";
 import { noteToFrequency } from "../../helper/noteToFrequency";
 import { useKeyboard } from './useKeyboard';
+import { useEffect, useState } from "react";
 
 const keys = [
   {note: 'C', className: 'white e'},
@@ -23,8 +24,21 @@ export type KeyboardProps = {
   octave: number;
 };
 
+
 const Keyboard = (props: KeyboardProps) => {
   const { playNoteHandler, stopNoteHandler, octave } = props;
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleWindowsResize = () => {
+    setWindowWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowsResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowsResize);
+    };
+  }, [setWindowWidth]);
 
   useKeyboard(props);
 
