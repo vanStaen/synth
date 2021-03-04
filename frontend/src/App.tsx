@@ -13,7 +13,8 @@ const App = () => {
   const [squareVolume, setSquareVolume] = useState(1)
   const [filterFreq, setFilterFreq] = useState(5000); // from 30hz to 25000hz
 
-  const {audioContext, primaryFilter} = useMemo(() => {
+ 
+  const {audioContext, primaryFilter, primaryGainControl} = useMemo(() => {
     const audioContext = new AudioContext();
 
     // Create a Gain control (Master Volume)
@@ -30,7 +31,7 @@ const App = () => {
     // Create all notes
     noteStore.createAllNotes({ audioContext, primaryFilter, sineVolume, squareVolume, noiseVolume });
 
-    return {audioContext, primaryFilter};
+    return {audioContext, primaryFilter, primaryGainControl};
   }, []);
 
   useEffect(() => {
@@ -38,10 +39,12 @@ const App = () => {
     primaryFilter.frequency.value = Math.round(filterFreq);
   }, [filterFreq])
 
-  /* useEffect(() => {
+  useEffect(() => {
     // Update primaryGain
     primaryGainControl.gain.setValueAtTime(mainVolume, audioContext.currentTime);
-  }, [mainVolume]) */
+  }, [mainVolume])
+
+
 
   const playNoteHandler = useCallback((freq: number) => {
     audioContext.resume();
