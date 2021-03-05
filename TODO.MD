@@ -1,8 +1,8 @@
-# Watchlist
+# Synth
 
 ## To-dos:
 
-- [ ] One commun GainNode pro oscillators type 
+- [x] One commun GainNode pro oscillators type 
 - [ ] Create Grid (Material design, materialize css usw)
 - [ ] Add Octave selector
 - [ ] Sound Visualisation (https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode)
