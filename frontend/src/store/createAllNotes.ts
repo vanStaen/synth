@@ -8,13 +8,13 @@ export const listOfNotes: string[] = [
 export type NoteConfig = {
     audioContext: AudioContext,
     primaryFilter: BiquadFilterNode,
-    sineVolume: number,
-    squareVolume: number,
-    noiseVolume: number,
+    sineGain: GainNode,
+    squareGain: GainNode,
+    noiseGain: GainNode,
 };
 
 export function createAllNotes(store: NoteStore, noteConfig: NoteConfig) {
-    const { audioContext, primaryFilter, sineVolume, squareVolume, noiseVolume } = noteConfig;
+    const { audioContext, primaryFilter, sineGain, squareGain, noiseGain } = noteConfig;
 
     listOfNotes.forEach((noteToCreate) => {
         let octave;
@@ -24,9 +24,9 @@ export function createAllNotes(store: NoteStore, noteConfig: NoteConfig) {
                 name: `${noteToCreate}${octave}`,
                 audioContext,
                 primaryFilter,
-                sineVolume,
-                squareVolume,
-                noiseVolume
+                sineGain,
+                squareGain,
+                noiseGain
             })
             // console.log("note created", `${noteToCreate}${octave}`, noteToFrequency(noteToCreate, 3));
         }
@@ -38,37 +38,37 @@ type NoteProps = {
     name: string,
     audioContext: AudioContext,
     primaryFilter: BiquadFilterNode,
-    sineVolume: number,
-    squareVolume: number,
-    noiseVolume: number
+    sineGain: GainNode,
+    squareGain: GainNode,
+    noiseGain: GainNode
 };
 
 export const createNote = (store: NoteStore, noteProps: NoteProps) => {
-    const { freq, name, audioContext, primaryFilter, sineVolume, squareVolume, noiseVolume } = noteProps;
+    const { freq, name, audioContext, primaryFilter, sineGain, squareGain, noiseGain } = noteProps;
 
     //Gain
-    const noteGain = audioContext.createGain();
-    noteGain.gain.setValueAtTime(0, 0);
-    noteGain.connect(primaryFilter);
+    const sineNoteGain = audioContext.createGain();
+    sineNoteGain.gain.setValueAtTime(0, 0);
+    sineNoteGain.connect(sineGain);
+    const squareNoteGain = audioContext.createGain();
+    squareNoteGain.gain.setValueAtTime(0, 0);
+    squareNoteGain.connect(squareGain);
+    const noiseNoteGain = audioContext.createGain();
+    noiseNoteGain.gain.setValueAtTime(0, 0);
+    noiseNoteGain.connect(noiseGain);
 
     //Sinus
-    const sinGain = audioContext.createGain();
-    sinGain.gain.setValueAtTime(sineVolume, 0);
-    sinGain.connect(noteGain);
-    const sinOsc = audioContext.createOscillator();
-    sinOsc.frequency.setValueAtTime(freq, 0);
-    sinOsc.type = 'sine';
-    sinOsc.connect(sinGain);
-    sinOsc.start();
+    const sineOsc = audioContext.createOscillator();
+    sineOsc.frequency.setValueAtTime(freq, 0);
+    sineOsc.type = 'sine';
+    sineOsc.connect(sineNoteGain);
+    sineOsc.start();
 
     //Square
-    const squareGain = audioContext.createGain();
-    squareGain.gain.setValueAtTime(squareVolume, 0);
-    squareGain.connect(noteGain);
     const squareOsc = audioContext.createOscillator();
     squareOsc.frequency.setValueAtTime(freq, 0);
     squareOsc.type = 'square';
-    squareOsc.connect(squareGain);
+    squareOsc.connect(squareNoteGain);
     squareOsc.start();
 
     //Noise
@@ -83,25 +83,21 @@ export const createNote = (store: NoteStore, noteProps: NoteProps) => {
         channelData[i] = Math.random() * 2 - 1;
     }
     audioContext.resume();
-    const whiteNoiseGain = audioContext.createGain();
-    whiteNoiseGain.gain.setValueAtTime(noiseVolume, 0);
-    whiteNoiseGain.connect(noteGain);
-    const whiteNoise = audioContext.createBufferSource();
-    whiteNoise.buffer = buffer;
-    whiteNoise.connect(whiteNoiseGain);
-    whiteNoise.loop = true;
-    whiteNoise.start();
+    const noise = audioContext.createBufferSource();
+    noise.buffer = buffer;
+    noise.connect(noiseNoteGain);
+    noise.loop = true;
+    noise.start();
 
     // Add to the Store
     store.addNote(
       freq,
       name,
-      noteGain,
-      sinOsc,
-      sinGain,
+      sineNoteGain,
+      sineOsc,
+      squareNoteGain,
       squareOsc,
-      squareGain,
-      whiteNoise,
-      whiteNoiseGain
+      noiseNoteGain,
+      noise,
     );
 }

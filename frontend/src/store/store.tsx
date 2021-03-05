@@ -4,13 +4,12 @@ import { NoteConfig, createAllNotes } from './createAllNotes';
 export interface noteData {
     freq: number,
     name: string,
-    noteGain: GainNode,
-    sinOsc: OscillatorNode,
-    sinGain: GainNode,
+    sineNoteGain: GainNode,
+    sineOsc: OscillatorNode,
+    squareNoteGain: GainNode,
     squareOsc: OscillatorNode,
-    squareGain: GainNode,
-    whiteNoise: AudioBufferSourceNode,
-    whiteNoiseGain: GainNode
+    noiseNoteGain: GainNode,
+    noise: AudioBufferSourceNode,
 };
 
 export class NoteStore {
@@ -31,24 +30,22 @@ export class NoteStore {
     addNote(
         freq: number,
         name: string,
-        noteGain: GainNode,
-        sinOsc: OscillatorNode,
-        sinGain: GainNode,
+        sineNoteGain: GainNode,
+        sineOsc: OscillatorNode,
+        squareNoteGain: GainNode,
         squareOsc: OscillatorNode,
-        squareGain: GainNode,
-        whiteNoise: AudioBufferSourceNode,
-        whiteNoiseGain: GainNode) {
+        noiseNoteGain: GainNode,
+        noise: AudioBufferSourceNode) {
 
         const note: noteData = {
             freq: freq,
             name: name,
-            noteGain: noteGain,
-            sinOsc: sinOsc,
-            sinGain: sinGain,
+            sineNoteGain: sineNoteGain,
+            sineOsc: sineOsc,
+            squareNoteGain: squareNoteGain,
             squareOsc: squareOsc,
-            squareGain: squareGain,
-            whiteNoise: whiteNoise,
-            whiteNoiseGain: whiteNoiseGain
+            noiseNoteGain: noiseNoteGain,
+            noise: noise
         }
 
         this.notes.push(note);

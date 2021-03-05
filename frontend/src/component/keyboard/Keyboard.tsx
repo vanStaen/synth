@@ -28,7 +28,7 @@ export type KeyboardProps = {
 const Keyboard = (props: KeyboardProps) => {
   const { playNoteHandler, stopNoteHandler, octave } = props;
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  
   const handleWindowsResize = () => {
     setWindowWidth(window.innerWidth);
   }

@@ -28,8 +28,23 @@ const App = () => {
     primaryFilter.frequency.value = filterFreq;
     primaryFilter.connect(primaryGainControl);
 
+    // Create Sine Gain
+    const sineGain = audioContext.createGain();
+    sineGain.gain.setValueAtTime(sineVolume, 0);
+    sineGain.connect(primaryGainControl);
+
+    // Create Square Gain
+    const squareGain = audioContext.createGain();
+    squareGain.gain.setValueAtTime(squareVolume, 0);
+    squareGain.connect(primaryGainControl);
+
+    // Create Noise Gain
+    const noiseGain = audioContext.createGain();
+    noiseGain.gain.setValueAtTime(noiseVolume, 0);
+    noiseGain.connect(primaryGainControl);
+
     // Create all notes
-    noteStore.createAllNotes({ audioContext, primaryFilter, sineVolume, squareVolume, noiseVolume });
+    noteStore.createAllNotes({ audioContext, primaryFilter, sineGain, squareGain, noiseGain });
 
     return {audioContext, primaryFilter, primaryGainControl};
   }, []);
@@ -44,29 +59,31 @@ const App = () => {
     primaryGainControl.gain.setValueAtTime(mainVolume, audioContext.currentTime);
   }, [mainVolume])
 
-
-
   const playNoteHandler = useCallback((freq: number) => {
     audioContext.resume();
     const noteArray = noteStore.notes.find(note => note.freq == freq);
     if (noteArray) {
-      const noteGain = noteArray.noteGain;
-      noteGain.gain.setValueAtTime(1, audioContext.currentTime);
-      const sineGain = noteArray.sinGain;
-      sineGain.gain.setValueAtTime(sineVolume, audioContext.currentTime);
-      const squareGain = noteArray.squareGain;
-      squareGain.gain.setValueAtTime(squareVolume, audioContext.currentTime);
-      const whiteNoiseGain = noteArray.whiteNoiseGain;
-      whiteNoiseGain.gain.setValueAtTime(noiseVolume, audioContext.currentTime);
+      const sineNoteGain = noteArray.sineNoteGain;
+      sineNoteGain.gain.setValueAtTime(sineVolume, audioContext.currentTime);
+      const squareNoteGain = noteArray.squareNoteGain;
+      squareNoteGain.gain.setValueAtTime(squareVolume, audioContext.currentTime);
+      const noiseNoteGain = noteArray.noiseNoteGain;
+      noiseNoteGain.gain.setValueAtTime(noiseVolume, audioContext.currentTime);
     }
   }, [noteStore.notes, audioContext]);
 
   const stopNoteHandler = useCallback((freq: number) => {
     const noteArray = noteStore.notes.find(note => note.freq == freq);
     if (noteArray) {
-      const noteGain = noteArray.noteGain;
-      noteGain.gain.setValueAtTime(noteGain.gain.value, audioContext.currentTime);
-      noteGain.gain.exponentialRampToValueAtTime(0.000001, audioContext.currentTime + 0.03);
+      const sineNoteGain = noteArray.sineNoteGain;
+      sineNoteGain.gain.setValueAtTime(sineNoteGain.gain.value, audioContext.currentTime);
+      sineNoteGain.gain.exponentialRampToValueAtTime(0.000001, audioContext.currentTime + 0.03);
+      const squareNoteGain = noteArray.squareNoteGain;
+      squareNoteGain.gain.setValueAtTime(squareNoteGain.gain.value, audioContext.currentTime);
+      squareNoteGain.gain.exponentialRampToValueAtTime(0.000001, audioContext.currentTime + 0.03);
+      const noiseNoteGain = noteArray.noiseNoteGain;
+      noiseNoteGain.gain.setValueAtTime(noiseNoteGain.gain.value, audioContext.currentTime);
+      noiseNoteGain.gain.exponentialRampToValueAtTime(0.000001, audioContext.currentTime + 0.03);
     }
   }, [noteStore.notes, audioContext]);
 
