@@ -3,6 +3,7 @@
 ## To-dos:
 
 - [x] One commun GainNode pro oscillators type 
+- [ ] Event listener only on mouse down. Delete listener on mouse up
 - [ ] Create Grid (Material design, materialize css usw)
 - [ ] Add Octave selector
 - [ ] Sound Visualisation (https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode)
