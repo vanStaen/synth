@@ -31,17 +31,17 @@ const App = () => {
     // Create Sine Gain
     const sineGain = audioContext.createGain();
     sineGain.gain.setValueAtTime(sineVolume, 0);
-    sineGain.connect(primaryGainControl);
+    sineGain.connect(primaryFilter);
 
     // Create Square Gain
     const squareGain = audioContext.createGain();
     squareGain.gain.setValueAtTime(squareVolume, 0);
-    squareGain.connect(primaryGainControl);
+    squareGain.connect(primaryFilter);
 
     // Create Noise Gain
     const noiseGain = audioContext.createGain();
     noiseGain.gain.setValueAtTime(noiseVolume, 0);
-    noiseGain.connect(primaryGainControl);
+    noiseGain.connect(primaryFilter);
 
     // Create all notes
     noteStore.createAllNotes({ audioContext, primaryFilter, sineGain, squareGain, noiseGain });
