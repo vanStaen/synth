@@ -3,16 +3,38 @@ import Knob from "../knob/Knob";
 
 import "./ControlGrid.css";
 
-export type ControlGridProps = {
+interface ControlGridProps {
   octave: number,
+  setOctave: (num: number) => void,
   mainVolume: number,
+  setMainVolume: (num: number) => void,
   noiseVolume: number,
+  setNoiseVolume: (num: number) => void,
   sineVolume: number,
+  setSineVolume: (num: number) => void,
   squareVolume: number,
+  setSquareVolume: (num: number) => void,
   filterFreq: number,
+  setFilterFreq: (num: number) => void,
+  //reducer: (action: Action) => void;
 };
 
 const ControlGrid = (props: ControlGridProps) => {
+  const { 
+    octave, 
+    setOctave,
+    mainVolume, 
+    setMainVolume, 
+    noiseVolume, 
+    setNoiseVolume,
+    sineVolume, 
+    setSineVolume,
+    squareVolume,
+    setSquareVolume, 
+    filterFreq,
+    setFilterFreq,
+  } = props;
+
   return (
     <div className="ControlGrid__container">
       <Grid container spacing={2}>

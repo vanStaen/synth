@@ -2,9 +2,11 @@ import { useEffect, useState, useCallback, useMemo } from 'react';
 import { noteStore } from "./store/store";
 import ControlGrid from "./component/controlGrid/ControlGrid";
 import Keyboard from "./component/keyboard/Keyboard";
-import Knob from "./component/knob/Knob";
 
 import "./App.css";
+
+type Action = {type: 'mainVolume'; volume: number} | 
+              {type: 'noiseVolume'; volume: number}
 
 const App = () => {
   const [octave, setOctave] = useState(5);
@@ -101,11 +103,17 @@ const App = () => {
         <p> </p>
         <ControlGrid 
           octave={octave}
+          setOctave={setOctave}
           mainVolume={mainVolume}
+          setMainVolume={setMainVolume}
           noiseVolume={noiseVolume}
+          setNoiseVolume={setNoiseVolume}
           sineVolume={sineVolume}
+          setSineVolume={setSineVolume}
           squareVolume={squareVolume}
+          setSquareVolume={setSquareVolume}
           filterFreq={filterFreq}
+          setFilterFreq={setFilterFreq}
         />
         <Keyboard
           playNoteHandler={playNoteHandler}
@@ -118,3 +126,7 @@ const App = () => {
 };
 
 export default App;
+
+// Use reducer instead of Setter
+// https://reactjs.org/docs/hooks-reference.html#usereducer
+// customehook : useAppState()
