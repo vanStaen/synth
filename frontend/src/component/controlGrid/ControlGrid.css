@@ -1,11 +1,10 @@
-.gridItem {
-    padding: 2vw;
+.ControlGrid__container {
+  width: calc(100vw - 50px);
+  border: 2px solid red;
+}
+
+.ControlGrid__gridItem {
     text-align: center;
-    color: #000000;
-    white-space: nowrap;
-    background: #aaa;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
     border: 1px solid white;
   }
 

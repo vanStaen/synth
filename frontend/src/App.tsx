@@ -99,14 +99,14 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <p> </p>
-        <ControlGrid />
-        <div>
-          <Knob value={mainVolume} valueSetter={setMainVolume} knobName="vol" min={0} max={0.1} multiply={1000} unit="%" />
-          <Knob value={noiseVolume} valueSetter={setNoiseVolume} knobName="noise" min={0.01} max={1} multiply={100} unit="%" />
-          <Knob value={sineVolume} valueSetter={setSineVolume} knobName="sin" min={0.01} max={1} multiply={100} unit="%" />
-          <Knob value={squareVolume} valueSetter={setSquareVolume} knobName="square" min={0.01} max={0.8} multiply={100} unit="%" />
-          <Knob value={filterFreq} valueSetter={setFilterFreq} knobName="filter" min={30} max={20000} multiply={1} unit="hz" />
-        </div>
+        <ControlGrid 
+          octave={octave}
+          mainVolume={mainVolume}
+          noiseVolume={noiseVolume}
+          sineVolume={sineVolume}
+          squareVolume={squareVolume}
+          filterFreq={filterFreq}
+        />
         <Keyboard
           playNoteHandler={playNoteHandler}
           stopNoteHandler={stopNoteHandler}
