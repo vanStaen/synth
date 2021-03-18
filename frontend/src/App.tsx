@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { noteStore } from "./store/store";
-import ControlGrid from "./component/ControlGrid/ControlGrid";
+import ControlGrid from "./component/ControlGridtemp/ControlGrid";
 import Keyboard from "./component/keyboard/Keyboard";
 import Knob from "./component/knob/Knob";
 
