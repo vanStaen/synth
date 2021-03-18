@@ -1,28 +1,25 @@
 .knob {
-    height: 5em;
-    width: 5em;
-    margin: 0 10px;
+    font-size: .6em;
+    width: 8em;
+    margin: 0 .5em;
     display: inline-block;
-    
+    border: 1px solid red;
   }
 
 .knob__name {
-    font-size: .6em;
     max-width: 5em;
-    text-transform: capitalize;
-}
-
-.knob__specialchar {
-    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 2.7px;
 }
 
 .knob__value {
-    font-size: .6em;
     padding: .2em .5em;
     background-color: rgba(111, 18, 13, 0.66);
 }
 
 .knob__image {
+    width: 8em;
     cursor: pointer;
     transform: rotate(-90deg);
 }
