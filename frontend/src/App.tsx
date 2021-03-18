@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { noteStore } from "./store/store";
+import ControlGrid from "./component/ControlGrid/ControlGrid";
 import Keyboard from "./component/keyboard/Keyboard";
 import Knob from "./component/knob/Knob";
 
@@ -98,6 +99,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <p> </p>
+        <ControlGrid />
         <div>
           <Knob value={mainVolume} valueSetter={setMainVolume} knobName="vol" min={0} max={0.1} multiply={1000} unit="%" />
           <Knob value={noiseVolume} valueSetter={setNoiseVolume} knobName="noise" min={0.01} max={1} multiply={100} unit="%" />
