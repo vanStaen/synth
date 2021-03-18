@@ -7,18 +7,23 @@ const ControlGrid = () => {
   return (
     <div>
       <Grid container spacing={2}>
-        <Grid item xs={4}></Grid>
         <Grid item xs={4}>
-          <Paper className="paper">xs=4</Paper>
+          <div>xs=4</div>
         </Grid>
         <Grid item xs={4}>
-          <Paper className="paper">xs=4</Paper>
-        </Grid>
-        <Grid item xs={8}>
-          <Paper className="paper">xs=8</Paper>
+          <div>xs=4</div>
         </Grid>
         <Grid item xs={4}>
-          <Paper className="paper">xs=4</Paper>
+          <div>xs=4</div>
+        </Grid>
+        <Grid item xs={4}>
+          <div>xs=4</div>
+        </Grid>
+        <Grid item xs={4}>
+          <div>xs=4</div>
+        </Grid>
+        <Grid item xs={4}>
+          <div>xs=4</div>
         </Grid>
       </Grid>
     </div>
