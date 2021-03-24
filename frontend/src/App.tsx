@@ -7,7 +7,7 @@ import "./App.css";
 
 type Action = {type: 'mainVolume'; volume: number} | 
               {type: 'noiseVolume'; volume: number}
-
+              
 const App = () => {
   const [octave, setOctave] = useState(5);
   const [mainVolume, setMainVolume] = useState(0.05);
@@ -19,6 +19,7 @@ const App = () => {
  
   const {audioContext, primaryFilter, primaryGainControl, sineGain, squareGain, noiseGain} = useMemo(() => {
     const audioContext = new AudioContext();
+    const visualizer = audioContext.createAnalyser();
 
     // Create a Gain control (Master Volume)
     const primaryGainControl = audioContext.createGain();
@@ -49,7 +50,7 @@ const App = () => {
     // Create all notes
     noteStore.createAllNotes({ audioContext, primaryFilter, sineGain, squareGain, noiseGain });
 
-    return {audioContext, primaryFilter, primaryGainControl, sineGain, squareGain, noiseGain};
+    return {audioContext, visualizer, primaryFilter, primaryGainControl, sineGain, squareGain, noiseGain};
   }, []);
 
   useEffect(() => {
@@ -100,7 +101,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <p> </p>
+        <div id="oscilloscope"></div>
         <ControlGrid 
           octave={octave}
           setOctave={setOctave}
