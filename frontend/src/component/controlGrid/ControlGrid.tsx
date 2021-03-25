@@ -1,6 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Knob from "../knob/Knob";
-import Slider from "../slider/Slider"
+import Slider from "../slider/Slider";
 
 import "./ControlGrid.css";
 
@@ -98,7 +98,44 @@ const ControlGrid = (props: ControlGridProps) => {
           <div className="ControlGrid__gridItem">3</div>
         </Grid>
         <Grid item xs={8}>
-          <div className="ControlGrid__gridItem">xs=8</div>
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="Attack"
+            min={0}
+            max={100}
+            multiply={1}
+            unit="%"
+          />
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="Decay"
+            min={0}
+            max={100}
+            multiply={1}
+            unit="%"
+          />
+
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="Release"
+            min={0}
+            max={100}
+            multiply={1}
+            unit="%"
+          />
+
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="Sustain"
+            min={0}
+            max={100}
+            multiply={1}
+            unit="%"
+          />
         </Grid>
         <Grid item xs={4}>
           <div className="ControlGrid__gridItem">xs=4</div>
@@ -108,7 +145,7 @@ const ControlGrid = (props: ControlGridProps) => {
         </Grid>
         <Grid item xs={5}>
           <div className="ControlGrid__gridItem">
-            <Slider/>
+            <Slider />
           </div>
         </Grid>
       </Grid>
