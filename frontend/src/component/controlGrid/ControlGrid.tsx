@@ -1,36 +1,37 @@
 import Grid from "@material-ui/core/Grid";
 import Knob from "../knob/Knob";
+import Slider from "../slider/Slider"
 
 import "./ControlGrid.css";
 
 interface ControlGridProps {
-  octave: number,
-  setOctave: (num: number) => void,
-  mainVolume: number,
-  setMainVolume: (num: number) => void,
-  noiseVolume: number,
-  setNoiseVolume: (num: number) => void,
-  sineVolume: number,
-  setSineVolume: (num: number) => void,
-  squareVolume: number,
-  setSquareVolume: (num: number) => void,
-  filterFreq: number,
-  setFilterFreq: (num: number) => void,
+  octave: number;
+  setOctave: (num: number) => void;
+  mainVolume: number;
+  setMainVolume: (num: number) => void;
+  noiseVolume: number;
+  setNoiseVolume: (num: number) => void;
+  sineVolume: number;
+  setSineVolume: (num: number) => void;
+  squareVolume: number;
+  setSquareVolume: (num: number) => void;
+  filterFreq: number;
+  setFilterFreq: (num: number) => void;
   //reducer: (action: Action) => void;
-};
+}
 
 const ControlGrid = (props: ControlGridProps) => {
-  const { 
-    octave, 
+  const {
+    octave,
     setOctave,
-    mainVolume, 
-    setMainVolume, 
-    noiseVolume, 
+    mainVolume,
+    setMainVolume,
+    noiseVolume,
     setNoiseVolume,
-    sineVolume, 
+    sineVolume,
     setSineVolume,
     squareVolume,
-    setSquareVolume, 
+    setSquareVolume,
     filterFreq,
     setFilterFreq,
   } = props;
@@ -106,7 +107,9 @@ const ControlGrid = (props: ControlGridProps) => {
           <div className="ControlGrid__gridItem">xs=4</div>
         </Grid>
         <Grid item xs={5}>
-          <div className="ControlGrid__gridItem">xs=5</div>
+          <div className="ControlGrid__gridItem">
+            <Slider/>
+          </div>
         </Grid>
       </Grid>
     </div>
