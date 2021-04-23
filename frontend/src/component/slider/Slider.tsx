@@ -1,8 +1,16 @@
 import { MDCSlider } from "@material/slider";
+import { useEffect, useRef } from "react";
 
-const slider = new MDCSlider(document.querySelector(".mdc-slider"));
 
-const Slider = (props) => {
+const Slider = () => {
+
+  const slider = useRef<MDCSlider | null>(null)
+
+  useEffect(() => {
+    const sliderElement = document.querySelector(".mdc-slider")
+    if (sliderElement) { slider.current = new MDCSlider(sliderElement) }
+  }, [])
+
   return (
     <div className="mdc-slider">
       <input
