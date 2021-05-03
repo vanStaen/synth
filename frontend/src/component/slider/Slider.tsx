@@ -1,15 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from "react";
 import { MDCSlider } from "@material/slider";
 
 const Slider = () => {
 
-  useEffect (() => {
-    const mdcSlider = document.querySelector(".mdc-slider");
-    if (mdcSlider) {
-      const slider = new MDCSlider(mdcSlider);
-    } else {
-      throw new Error("Mdc Slider was not initialised");
-    }
+  const slider = useRef<MDCSlider | null>(null)
+
+  useEffect(() => {
+    const sliderElement = document.querySelector(".mdc-slider")
+    if (sliderElement) { slider.current = new MDCSlider(sliderElement) }
   }, [])
 
   return (

@@ -1,4 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
+
+import { Dispatcher } from "../../useAppState";
 import { degreeToValue } from "../../helper/degreeToValue";
 import { valueToDegree } from "../../helper/valueToDegree";
 import knob from "../../logos/knob.svg";
@@ -6,16 +8,17 @@ import "./Knob.css";
 
 type KnobProps = {
   value: number;
+  name: "octave" | "mainVolume" | "noiseVolume" | "sineVolume" | "squareVolume" | "filterFreq";
   min: number;
   max: number;
   multiply: number;
-  valueSetter: (value: number) => void;
-  knobName: string;
+  dispatch: Dispatcher;
+  title: string;
   unit: String;
 };
 
 const Knob = (props: KnobProps) => {
-  const { value, min, max, multiply, valueSetter, knobName, unit } = props;
+  const { value, name, min, max, multiply, dispatch, title, unit } = props;
 
   const [showValue, setShowValue] = useState(false);
   const [knobValue, setKnobValue] = useState(value);
@@ -23,13 +26,13 @@ const Knob = (props: KnobProps) => {
   const [mouseIsDown, setMouseIsDown] = useState(false);
 
   useEffect(() => {
-    document.getElementById(knobName)!.setAttribute("draggable", "false");
+    document.getElementById(title)!.setAttribute("draggable", "false");
     setKnobValue(knobValue * multiply);
     const knobRotation = valueToDegree(knobValue, min, max, -90, 310);
     document
-      .getElementById(knobName)!
+      .getElementById(title)!
       .style.setProperty("transform", `rotate(${knobRotation}deg)`);
-  }, [knobName, setKnobValue, multiply, min, max]);
+  }, [title, setKnobValue, multiply, min, max]);
 
   const mouseDownHandler = useCallback(
     (event: React.MouseEvent) => {
@@ -67,13 +70,13 @@ const Knob = (props: KnobProps) => {
         const newValue = degreeToValue(movedInDegree, min, max, -90, 310);
 
         document
-          .getElementById(knobName)!
+          .getElementById(title)!
           .style.setProperty("transform", `rotate(${movedInDegree}deg)`);
-        valueSetter(newValue);
+        dispatch({ type: name, value: newValue });
         setKnobValue(Math.round(newValue * multiply));
       }
     },
-    [originalClientY, mouseIsDown, min, max, multiply, knobName, valueSetter]
+    [originalClientY, mouseIsDown, min, max, multiply, title, dispatch]
   );
 
   return (
@@ -84,7 +87,7 @@ const Knob = (props: KnobProps) => {
     >
       <img
         src={knob}
-        id={knobName}
+        id={title}
         className="knob__image"
         onMouseDown={mouseDownHandler}
         onMouseMove={mouseMoveHandler}
@@ -96,8 +99,8 @@ const Knob = (props: KnobProps) => {
           {unit}
         </span>
       ) : (
-        <span className="knob__name">{knobName}</span>
-      )}
+          <span className="knob__name">{title}</span>
+        )}
     </div>
   );
 };
