@@ -1,6 +1,5 @@
 .ControlGrid__container {
   width: calc(100vw - 50px);
-  border: 2px solid red;
 }
 
 .ControlGrid__gridItem {

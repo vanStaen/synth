@@ -39,88 +39,96 @@ const ControlGrid = (props: ControlGridProps) => {
   return (
     <div className="ControlGrid__container">
       <Grid container spacing={2}>
-        {/* VOLUME */}        
-        <Grid item xs={6}>
-          <div className="ControlGrid__gridItem">
-            <Knob
-              value={mainVolume}
-              valueSetter={setMainVolume}
-              knobName="vol"
-              min={0}
-              max={0.1}
-              multiply={1000}
-              unit="%"
-            />
-            <Knob
-              value={noiseVolume}
-              valueSetter={setNoiseVolume}
-              knobName="noise"
-              min={0.01}
-              max={1}
-              multiply={100}
-              unit="%"
-            />
-            <Knob
-              value={sineVolume}
-              valueSetter={setSineVolume}
-              knobName="sin"
-              min={0.01}
-              max={1}
-              multiply={100}
-              unit="%"
-            />
-            <Knob
-              value={squareVolume}
-              valueSetter={setSquareVolume}
-              knobName="square"
-              min={0.01}
-              max={0.8}
-              multiply={100}
-              unit="%"
-            />
-          </div>
+        {/* VOLUME */}
+        <Grid item xs={2}>
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="vol"
+            min={0}
+            max={0.1}
+            multiply={1000}
+            unit="%"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Knob
+            value={noiseVolume}
+            valueSetter={setNoiseVolume}
+            knobName="noise"
+            min={0.01}
+            max={1}
+            multiply={100}
+            unit="%"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Knob
+            value={sineVolume}
+            valueSetter={setSineVolume}
+            knobName="sin"
+            min={0.01}
+            max={1}
+            multiply={100}
+            unit="%"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Knob
+            value={squareVolume}
+            valueSetter={setSquareVolume}
+            knobName="square"
+            min={0.01}
+            max={0.8}
+            multiply={100}
+            unit="%"
+          />
         </Grid>
 
-        {/* ADSR */}    
-        <Grid item xs={6}>
-          <div className="ControlGrid__gridItem">
-            <Knob
-              value={mainVolume}
-              valueSetter={setMainVolume}
-              knobName="Attack"
-              min={0}
-              max={100}
-              multiply={1}
-              unit="%"
-            />
-            <Knob
-              value={mainVolume}
-              valueSetter={setMainVolume}
-              knobName="Decay"
-              min={0}
-              max={100}
-              multiply={1}
-              unit="%"
-            />
-            <Knob
-              value={mainVolume}
-              valueSetter={setMainVolume}
-              knobName="Release"
-              min={0}
-              max={100}
-              multiply={1}
-              unit="%"
-            />
-            <Knob
-              value={mainVolume}
-              valueSetter={setMainVolume}
-              knobName="Sustain"
-              min={0}
-              max={100}
-              multiply={1}
-              unit="%"
-            />
-          </div>
+        {/* ADSR */}
+        <Grid item xs={2}>
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="Attack"
+            min={0}
+            max={100}
+            multiply={1}
+            unit="%"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="Decay"
+            min={0}
+            max={100}
+            multiply={1}
+            unit="%"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="Release"
+            min={0}
+            max={100}
+            multiply={1}
+            unit="%"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Knob
+            value={mainVolume}
+            valueSetter={setMainVolume}
+            knobName="Sustain"
+            min={0}
+            max={100}
+            multiply={1}
+            unit="%"
+          />
         </Grid>
 
         <Grid item xs={2}>
@@ -134,26 +142,8 @@ const ControlGrid = (props: ControlGridProps) => {
             unit="hz"
           />
         </Grid>
-        <Grid item xs={4}>
-          <div className="ControlGrid__gridItem">4</div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="ControlGrid__gridItem">Graph</div>
-        </Grid>
-        <Grid item xs={3}>
-          <div className="ControlGrid__gridItem">3</div>
-        </Grid>
-        
-        <Grid item xs={4}>
-          <div className="ControlGrid__gridItem">xs=4</div>
-        </Grid>
-        <Grid item xs={4}>
-          <div className="ControlGrid__gridItem">xs=4</div>
-        </Grid>
         <Grid item xs={5}>
-          <div className="ControlGrid__gridItem">
             <Slider />
-          </div>
         </Grid>
       </Grid>
     </div>
