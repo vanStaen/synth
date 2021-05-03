@@ -33,6 +33,7 @@ const Knob = (props: KnobProps) => {
 
   const mouseDownHandler = useCallback(
     (event: React.MouseEvent) => {
+      window.addEventListener('mouseup',mouseUpHandler)
       setOriginalClientY(event.clientY);
       setMouseIsDown(true);
     },
@@ -40,6 +41,7 @@ const Knob = (props: KnobProps) => {
   );
 
   const mouseUpHandler = useCallback(() => {
+    window.removeEventListener('mouseup',mouseUpHandler)
     setOriginalClientY(0);
     setMouseIsDown(false);
   }, [setOriginalClientY, setMouseIsDown]);
@@ -86,7 +88,6 @@ const Knob = (props: KnobProps) => {
         className="knob__image"
         onMouseDown={mouseDownHandler}
         onMouseMove={mouseMoveHandler}
-        onMouseUp={mouseUpHandler}
         onMouseLeave={mouseLeaveHandler}
       />
       {showValue ? (

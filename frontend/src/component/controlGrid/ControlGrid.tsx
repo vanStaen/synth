@@ -39,7 +39,8 @@ const ControlGrid = (props: ControlGridProps) => {
   return (
     <div className="ControlGrid__container">
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        {/* VOLUME */}        
+        <Grid item xs={6}>
           <div className="ControlGrid__gridItem">
             <Knob
               value={mainVolume}
@@ -77,19 +78,64 @@ const ControlGrid = (props: ControlGridProps) => {
               multiply={100}
               unit="%"
             />
+          </div>
+        </Grid>
+
+        {/* ADSR */}    
+        <Grid item xs={6}>
+          <div className="ControlGrid__gridItem">
             <Knob
-              value={filterFreq}
-              valueSetter={setFilterFreq}
-              knobName="filter"
-              min={30}
-              max={20000}
+              value={mainVolume}
+              valueSetter={setMainVolume}
+              knobName="Attack"
+              min={0}
+              max={100}
               multiply={1}
-              unit="hz"
+              unit="%"
+            />
+            <Knob
+              value={mainVolume}
+              valueSetter={setMainVolume}
+              knobName="Decay"
+              min={0}
+              max={100}
+              multiply={1}
+              unit="%"
+            />
+            <Knob
+              value={mainVolume}
+              valueSetter={setMainVolume}
+              knobName="Release"
+              min={0}
+              max={100}
+              multiply={1}
+              unit="%"
+            />
+            <Knob
+              value={mainVolume}
+              valueSetter={setMainVolume}
+              knobName="Sustain"
+              min={0}
+              max={100}
+              multiply={1}
+              unit="%"
             />
           </div>
         </Grid>
-        <Grid item xs={3}>
-          <div className="ControlGrid__gridItem">3</div>
+
+        <Grid item xs={2}>
+          <Knob
+            value={filterFreq}
+            valueSetter={setFilterFreq}
+            knobName="filter"
+            min={30}
+            max={20000}
+            multiply={1}
+            unit="hz"
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <div className="ControlGrid__gridItem">4</div>
         </Grid>
         <Grid item xs={6}>
           <div className="ControlGrid__gridItem">Graph</div>
@@ -97,46 +143,7 @@ const ControlGrid = (props: ControlGridProps) => {
         <Grid item xs={3}>
           <div className="ControlGrid__gridItem">3</div>
         </Grid>
-        <Grid item xs={8}>
-          <Knob
-            value={mainVolume}
-            valueSetter={setMainVolume}
-            knobName="Attack"
-            min={0}
-            max={100}
-            multiply={1}
-            unit="%"
-          />
-          <Knob
-            value={mainVolume}
-            valueSetter={setMainVolume}
-            knobName="Decay"
-            min={0}
-            max={100}
-            multiply={1}
-            unit="%"
-          />
-
-          <Knob
-            value={mainVolume}
-            valueSetter={setMainVolume}
-            knobName="Release"
-            min={0}
-            max={100}
-            multiply={1}
-            unit="%"
-          />
-
-          <Knob
-            value={mainVolume}
-            valueSetter={setMainVolume}
-            knobName="Sustain"
-            min={0}
-            max={100}
-            multiply={1}
-            unit="%"
-          />
-        </Grid>
+        
         <Grid item xs={4}>
           <div className="ControlGrid__gridItem">xs=4</div>
         </Grid>

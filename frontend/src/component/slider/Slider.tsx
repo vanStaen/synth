@@ -1,8 +1,17 @@
+import { useEffect } from 'react';
 import { MDCSlider } from "@material/slider";
 
-const slider = new MDCSlider(document.querySelector(".mdc-slider"));
+const Slider = () => {
 
-const Slider = (props) => {
+  useEffect (() => {
+    const mdcSlider = document.querySelector(".mdc-slider");
+    if (mdcSlider) {
+      const slider = new MDCSlider(mdcSlider);
+    } else {
+      throw new Error("Mdc Slider was not initialised");
+    }
+  }, [])
+
   return (
     <div className="mdc-slider">
       <input

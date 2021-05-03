@@ -1,13 +1,13 @@
 .knob {
     font-size: .6em;
-    width: 8em;
+    width: 6em;
     margin: 0 .5em;
     display: inline-block;
-    border: 1px solid red;
+    text-align: center;
   }
 
 .knob__name {
-    max-width: 5em;
+    width: auto;
     text-transform: uppercase;
     font-weight: 200;
     letter-spacing: 2.7px;
@@ -19,7 +19,7 @@
 }
 
 .knob__image {
-    width: 8em;
+    width: 6em;
     cursor: pointer;
     transform: rotate(-90deg);
 }
