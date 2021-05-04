@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// PATCH single preset from db (based on presetId)
+// POST single preset from db (based on presetId)
 router.post("/", async (req, res) => {
   try {
     const createQuery = `INSERT INTO presets (noise, sine, square, attack, decay, sustain, release, filter) VALUES(${req.body.noise}, ${req.body.sine}, ${req.body.square}, ${req.body.attack}, ${req.body.decay}, ${req.body.sustain}, ${req.body.release}, ${req.body.filter});`;

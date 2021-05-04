@@ -6,7 +6,7 @@
 - [x] Create Grid (Material design)
 - [ ] ADSR feature
 - [ ] Knob : handle optional logarythmical scale
-- [ ] Add Octave selector
+- [ ] Add Octave selector (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range)
 - [ ] Sound Visualisation (https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode)
 - [ ] Preset
   - [ ] Store preset in backend "factory preset", not modifiable
@@ -17,3 +17,12 @@
   - [ ] check pdf erstellung in webOrderFrontend
 - [ ] ~Midi~
  
+
+### TODO: 
+Prepare statemenet to avoid "SQL injection"
+mysql.prepare() <- prepare statement
+
+Split endpoint into MVC: Model (object preset) View Controller Service Repository
+-> repository makes the SQL
+
+Google "Design pattern" (e.g. singleton)
