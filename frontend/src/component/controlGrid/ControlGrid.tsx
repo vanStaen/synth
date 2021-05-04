@@ -75,8 +75,51 @@ const ControlGrid = (props: ControlGridProps) => {
           </div>
         </Grid>
 
-        {/* ADSR */}
-     
+        <Grid item xs={12}>
+          <div className="ControlGrid__gridItem">
+            <Knob
+              value={state.mainVolume}
+              name="mainVolume"
+              dispatch={dispatch}
+              title="Attack"
+              min={0}
+              max={0.1}
+              multiply={1000}
+              unit="%"
+            />
+            <Knob
+              value={state.noiseVolume}
+              name="noiseVolume"
+              dispatch={dispatch}
+              title="Decay"
+              min={0.01}
+              max={1}
+              multiply={100}
+              unit="%"
+            />
+            <Knob
+              value={state.sineVolume}
+              name="sineVolume"
+              dispatch={dispatch}
+              title="Sustain"
+              min={0.01}
+              max={1}
+              multiply={100}
+              unit="%"
+            />
+            <Knob
+              value={state.squareVolume}
+              name="squareVolume"
+              dispatch={dispatch}
+              title="Release"
+              min={0.01}
+              max={0.8}
+              multiply={100}
+              unit="%"
+            />
+          </div>
+        </Grid>
+             
              <Grid item xs={5}>
             <Slider />
         </Grid>
