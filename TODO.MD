@@ -22,7 +22,8 @@
 Prepare statemenet to avoid "SQL injection"
 mysql.prepare() <- prepare statement
 
+https://dzone.com/articles/the-easiest-way-to-query-postgres-in-nodejs-secure?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+dzone%2Fwebdev
+
 Split endpoint into MVC: Model (object preset) View Controller Service Repository
 -> repository makes the SQL
-
 Google "Design pattern" (e.g. singleton)

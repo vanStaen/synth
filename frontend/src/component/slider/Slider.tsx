@@ -1,45 +1,28 @@
-import { useEffect, useRef } from "react";
-import { MDCSlider } from "@material/slider";
+import { useState } from "react";
+
+import "./Slider.css";
 
 const Slider = () => {
+  const [value, setValue] = useState(2);
 
-  const slider = useRef<MDCSlider | null>(null)
-
-  useEffect(() => {
-    const sliderElement = document.querySelector(".mdc-slider")
-    if (sliderElement) { slider.current = new MDCSlider(sliderElement) }
-  }, [])
+  const changeHandler = (event: React.ChangeEvent) => {
+    console.log(event);
+  };
 
   return (
-    <div className="mdc-slider">
+    <div className="slider">
       <input
-        className="mdc-slider__input"
+        className="slider__input"
         type="range"
+        id="slider"
+        name="slider"
         min="0"
-        max="100"
-        value="50"
-        name="volume"
-        aria-label="Continuous slider demo"
+        max="4"
+        step="1"
+        defaultValue="2"
+        onChange={changeHandler}
       />
-      <div className="mdc-slider__track">
-        <div className="mdc-slider__track--inactive"></div>
-        <div className="mdc-slider__track--active">
-          <div className="mdc-slider__track--active_fill"></div>
-        </div>
-      </div>
-      <div className="mdc-slider__thumb">
-        <div
-          className="mdc-slider__value-indicator-container"
-          aria-hidden="true"
-        >
-          <div className="mdc-slider__value-indicator">
-            <span className="mdc-slider__value-indicator-text">
-              Octave selector
-            </span>
-          </div>
-        </div>
-        <div className="mdc-slider__thumb-knob"></div>
-      </div>
+      <label htmlFor="slider" className="slider__title">Octave Select</label>
     </div>
   );
 };

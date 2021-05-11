@@ -15,10 +15,11 @@ type KnobProps = {
   dispatch: Dispatcher;
   title: string;
   unit: String;
+  color?: boolean;
 };
 
 const Knob = (props: KnobProps) => {
-  const { value, name, min, max, multiply, dispatch, title, unit } = props;
+  const { value, name, min, max, multiply, dispatch, title, unit, color } = props;
 
   const [showValue, setShowValue] = useState(false);
   const [knobValue, setKnobValue] = useState(value);
@@ -92,6 +93,7 @@ const Knob = (props: KnobProps) => {
         onMouseDown={mouseDownHandler}
         onMouseMove={mouseMoveHandler}
         onMouseLeave={mouseLeaveHandler}
+        style={ color ? { filter: "hue-rotate(180deg) sepia(20%)"} : {}}
       />
       {showValue ? (
         <span className="knob__value">

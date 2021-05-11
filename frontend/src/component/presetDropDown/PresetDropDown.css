@@ -1,15 +1,15 @@
-.slider {
+.Preset {
     width: 7em;
     margin: 0 .5em;
 }
 
-.slider__input {
+.Preset__dropdown {
     width: 12em;
     margin: 0 .5em;
     display: inline-block;
 }
 
-.slider__title {
+.Preset__title {
     font-size: .6em;
     text-transform: uppercase;
     font-weight: 200;

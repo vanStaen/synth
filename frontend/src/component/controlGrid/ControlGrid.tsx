@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { State, Dispatcher } from "../../useAppState";
 import Knob from "../knob/Knob";
 import Slider from "../slider/Slider";
+import PresetDropDown from "../presetDropDown/PresetDropDown";
 
 import "./ControlGrid.css";
 
@@ -12,10 +13,7 @@ interface ControlGridProps {
 }
 
 const ControlGrid = (props: ControlGridProps) => {
-  const {
-    dispatch,
-    state,
-  } = props;
+  const { dispatch, state } = props;
 
   return (
     <div className="ControlGrid__container">
@@ -71,6 +69,7 @@ const ControlGrid = (props: ControlGridProps) => {
               max={20000}
               multiply={1}
               unit="hz"
+              color={true}
             />
           </div>
         </Grid>
@@ -119,10 +118,12 @@ const ControlGrid = (props: ControlGridProps) => {
             />
           </div>
         </Grid>
-             
-             <Grid item xs={5}>
-            <Slider />
+        <Grid item xs={5}>
+          <Slider />
         </Grid>
+        <Grid item xs={5}>
+          < PresetDropDown />
+        </Grid>        
       </Grid>
     </div>
   );
