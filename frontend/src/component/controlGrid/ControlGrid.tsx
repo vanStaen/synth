@@ -119,11 +119,18 @@ const ControlGrid = (props: ControlGridProps) => {
           </div>
         </Grid>
         <Grid item xs={5}>
-          <Slider />
+          <Slider
+            value={state.octave}
+            name="octave"
+            dispatch={dispatch}
+            title="Octave Select"
+            min={1}
+            max={9}
+          />
         </Grid>
         <Grid item xs={5}>
-          < PresetDropDown />
-        </Grid>        
+          <PresetDropDown />
+        </Grid>
       </Grid>
     </div>
   );

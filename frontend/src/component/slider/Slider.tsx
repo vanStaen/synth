@@ -1,28 +1,38 @@
-import { useState } from "react";
+import { useCallback } from "react";
+import { Dispatcher } from "../../useAppState";
 
 import "./Slider.css";
 
-const Slider = () => {
-  const [value, setValue] = useState(2);
+type SliderProps = {
+  value: number;
+  name: "octave";
+  dispatch: Dispatcher;
+  title: string;
+  min: number;
+  max: number;
+};
+const Slider = (props: SliderProps) => {
+  const { value, name, min, max, dispatch, title } = props;
 
-  const changeHandler = (event: React.ChangeEvent) => {
-    console.log(event);
-  };
+  const changeHandler = useCallback((event: React.ChangeEvent <HTMLInputElement>) => {
+    dispatch({ type: name, value: parseInt(event.target.value, 10)});
+    console.log(event.target.value);
+  }, []);
 
   return (
     <div className="slider">
       <input
         className="slider__input"
         type="range"
-        id="slider"
-        name="slider"
-        min="0"
-        max="4"
+        id={`${name}_slider`}
+        name={name}
+        min={min}
+        max={max}
         step="1"
-        defaultValue="2"
+        defaultValue={value}
         onChange={changeHandler}
       />
-      <label htmlFor="slider" className="slider__title">Octave Select</label>
+      <label htmlFor="slider" className="slider__title">{title}</label>
     </div>
   );
 };

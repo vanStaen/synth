@@ -110,7 +110,3 @@ const App = () => {
 };
 
 export default App;
-
-// Use reducer instead of Setter
-// https://reactjs.org/docs/hooks-reference.html#usereducer
-// customhook : useAppState()

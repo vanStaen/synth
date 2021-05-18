@@ -8,7 +8,7 @@ import "./Knob.css";
 
 type KnobProps = {
   value: number;
-  name: "octave" | "mainVolume" | "noiseVolume" | "sineVolume" | "squareVolume" | "filterFreq";
+  name: "mainVolume" | "noiseVolume" | "sineVolume" | "squareVolume" | "filterFreq";
   min: number;
   max: number;
   multiply: number;
@@ -93,7 +93,7 @@ const Knob = (props: KnobProps) => {
         onMouseDown={mouseDownHandler}
         onMouseMove={mouseMoveHandler}
         onMouseLeave={mouseLeaveHandler}
-        style={ color ? { filter: "hue-rotate(180deg) sepia(20%)"} : {}}
+        style={ color ? { filter: "hue-rotate(180deg) sepia(20%)"} : {} }
       />
       {showValue ? (
         <span className="knob__value">
