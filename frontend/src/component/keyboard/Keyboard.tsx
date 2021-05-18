@@ -1,7 +1,9 @@
-import "./Keyboard.css";
+import { useEffect, useState } from "react";
+
 import { noteToFrequency } from "../../helper/noteToFrequency";
 import { useKeyboard } from './useKeyboard';
-import { useEffect, useState } from "react";
+
+import "./Keyboard.css";
 
 const keys = [
   {note: 'C', className: 'white e'},
