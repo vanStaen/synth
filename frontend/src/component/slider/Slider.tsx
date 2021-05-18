@@ -14,10 +14,13 @@ type SliderProps = {
 const Slider = (props: SliderProps) => {
   const { value, name, min, max, dispatch, title } = props;
 
-  const changeHandler = useCallback((event: React.ChangeEvent <HTMLInputElement>) => {
-    dispatch({ type: name, value: parseInt(event.target.value, 10)});
-    console.log(event.target.value);
-  }, []);
+  const changeHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({ type: name, value: parseInt(event.target.value, 10) });
+      console.log(event.target.value);
+    },
+    []
+  );
 
   return (
     <div className="slider">
@@ -32,7 +35,9 @@ const Slider = (props: SliderProps) => {
         defaultValue={value}
         onChange={changeHandler}
       />
-      <label htmlFor="slider" className="slider__title">{title}</label>
+      <label htmlFor="slider" className="slider__title">
+        {title}
+      </label>
     </div>
   );
 };

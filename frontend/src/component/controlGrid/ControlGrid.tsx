@@ -125,7 +125,7 @@ const ControlGrid = (props: ControlGridProps) => {
             dispatch={dispatch}
             title="Octave Select"
             min={1}
-            max={9}
+            max={8}
           />
         </Grid>
         <Grid item xs={5}>
